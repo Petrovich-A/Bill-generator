@@ -9,7 +9,7 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) {
         Map<Integer, Integer> initialData = new HashMap<>();
-        initialData.put(1, 5);
+        initialData.put(1, 2);
         initialData.put(2, 4);
 
         List<Product> products = new ArrayList<>();
@@ -23,16 +23,15 @@ public class Main {
         product2.setName("name2");
         product2.setPrise(4.9);
 
-        BillCalculator billCalculator = new BillCalculator();
-        for (Product product : products) {
-            product.setTotalPrise(billCalculator.findTotalPrise(product.getPrise(),product.getQuantity()));
-        }
         BillGenerator billGenerator = new BillGenerator();
         billGenerator.generateListProducts(product1);
         billGenerator.generateListProducts(product2);
-        System.out.println("products: " + products);
-        billGenerator.printAsTable(products);
+        billGenerator.putTotalPrise(products);
 
+        BillCalculator billCalculator = new BillCalculator();
+        double totalPrise = billCalculator.findTotalBillPrise(products);
+
+        billGenerator.printAsTable(products, totalPrise);
 
     }
 }
