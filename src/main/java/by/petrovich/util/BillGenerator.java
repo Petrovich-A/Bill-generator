@@ -1,5 +1,6 @@
 package by.petrovich.util;
 
+import by.petrovich.model.DiscountCard;
 import by.petrovich.model.Product;
 
 import java.util.ArrayList;
@@ -10,27 +11,34 @@ public class BillGenerator {
     private final String DESCRIPTION = "DESCRIPTION";
     private final String PRICE = "PRICE";
     private final String TOTAL = "TOTAL";
+    private final String TOTAL_SUM = "TOTAL SUM:";
+    private final String DISCOUNT = "DISCOUNT:";
     private final String END_LINE_SIGHT = "\n";
     private final BillCalculator billCalculator = new BillCalculator();
 
-    public void printAsTable(List<Product> products, double totalPrise) {
+    public void printBillAsTable(List<Product> products, DiscountCard discountCard) {
         printHeader();
         printDelimiterLine();
         printRow(products);
         printDelimiterLine();
-        printFooter(totalPrise);
-    }
-
-    public List<Product> putTotalPrise(List<Product> products) {
-        for (Product product : products) {
-            product.setTotalPrise(billCalculator.findTotalProductsPrise(product.getPrise(), product.getQuantity()));
+        if (discountCard != null) {
+            printDiscountSum(billCalculator.calculateDiscountSum(products, discountCard.getPercentOfDiscount()));
+            printTotalPricesSum(billCalculator.calculatePrisesSumWithDiscount(products, discountCard.getPercentOfDiscount()));
+        } else {
+            printTotalPricesSum(billCalculator.calculatePrisesSum(products));
         }
-        return products;
     }
 
     public List<Product> generateListProducts(Product product) {
         List<Product> products = new ArrayList<>();
         products.add(product);
+        return products;
+    }
+
+    public List<Product> putTotalPrise(List<Product> products) {
+        for (Product product : products) {
+            product.setTotalPrise(billCalculator.calculateProductPrise(product.getPrise(), product.getQuantity()));
+        }
         return products;
     }
 
@@ -42,11 +50,15 @@ public class BillGenerator {
     }
 
     private void printHeader() {
-        System.out.printf("%3s %20s %10s %10s %s", QUANTITY, DESCRIPTION, PRICE, TOTAL, END_LINE_SIGHT);
+        System.out.format("%3s %20s %10s %10s %s", QUANTITY, DESCRIPTION, PRICE, TOTAL, END_LINE_SIGHT);
     }
 
-    private void printFooter(double totalPrise) {
-        System.out.printf("%3s %40f %s", TOTAL, totalPrise, END_LINE_SIGHT);
+    private void printTotalPricesSum(double totalPrise) {
+        System.out.format("%3s %35f %s", TOTAL_SUM, totalPrise, END_LINE_SIGHT);
+    }
+
+    private void printDiscountSum(double discountAmount) {
+        System.out.format("%3s %35f %s", DISCOUNT, discountAmount, END_LINE_SIGHT);
     }
 
     private void printDelimiterLine() {
