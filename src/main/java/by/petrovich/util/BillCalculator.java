@@ -5,20 +5,31 @@ import by.petrovich.model.Product;
 import java.util.List;
 
 public class BillCalculator {
-    public double findTotalProductsPrise(double prise, int quantity) {
+    public double calculateProductPrise(double prise, int quantity) {
         return prise * quantity;
     }
 
-    public double findTotalBillPrise(List<Product> products) {
-        double totalPrise = 0.0;
-        for (Product product : products) {
-            totalPrise += totalPrise + product.getPrise();
-        }
-        return totalPrise;
+    public double calculatePriseWithDiscount(double prise, double discountPercent) {
+        return prise * discountPercent / 100;
     }
 
-    public double countPriseWithCardDiscount(double prise, double discount) {
-        double priseWithDiscount = 0.0;
-        return priseWithDiscount = prise * discount / 100;
+    public double calculatePrisesSum(List<Product> products) {
+        double prisesSum = 0.0;
+        for (Product product : products) {
+            prisesSum += product.getTotalPrise();
+        }
+        return prisesSum;
+    }
+
+    public double calculateDiscountSum(List<Product> products, double discountPercent) {
+        double discountSum = 0.0;
+        for (Product product : products) {
+            discountSum += calculatePriseWithDiscount(product.getTotalPrise(), discountPercent);
+        }
+        return discountSum;
+    }
+
+    public double calculatePrisesSumWithDiscount(List<Product> products, double discountPercent) {
+        return calculatePrisesSum(products) - calculateDiscountSum(products, discountPercent);
     }
 }
