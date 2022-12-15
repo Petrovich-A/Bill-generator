@@ -1,8 +1,6 @@
 package by.petrovich.model;
 
 import java.util.Objects;
-import java.util.Set;
-
 public class Product {
     int id;
     String name;
