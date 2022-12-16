@@ -14,6 +14,7 @@ public class Main {
         Map<Integer, Integer> initialData = new HashMap<>();
         initialData.put(1, 2);
         initialData.put(2, 3);
+        initialData.put(3, 6);
         DiscountCard discountCard = new DiscountCard(1234, 10);
 
         List<Product> products = new ArrayList<>();
@@ -22,15 +23,23 @@ public class Main {
         }
         Product product1 = products.get(0);
         Product product2 = products.get(1);
+        Product product3 = products.get(2);
         product1.setName("name1");
+        product1.setOnSale(true);
         product1.setPrise(10);
         product2.setName("name2");
+        product2.setOnSale(false);
         product2.setPrise(5);
+        product3.setName("name3");
+        product3.setOnSale(true);
+        product3.setPrise(12.7);
 
         BillGenerator billGenerator = new BillGenerator();
         billGenerator.generateListProducts(product1);
         billGenerator.generateListProducts(product2);
-        List<Product> productsFull = billGenerator.putTotalPrise(products);
+        billGenerator.generateListProducts(product3);
+        List<Product> productsFull = billGenerator.putTotalPrises(products);
+        System.out.println(productsFull);
         billGenerator.printBillAsTable(productsFull, discountCard);
 
     }
