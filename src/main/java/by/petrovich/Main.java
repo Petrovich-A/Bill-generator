@@ -3,6 +3,7 @@ package by.petrovich;
 import by.petrovich.model.DiscountCard;
 import by.petrovich.model.Product;
 import by.petrovich.util.BillGenerator;
+import by.petrovich.util.impl.BillGeneratorImpl;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -34,7 +35,7 @@ public class Main {
         product3.setOnSale(true);
         product3.setPrise(12.7);
 
-        BillGenerator billGenerator = new BillGenerator();
+        BillGeneratorImpl billGenerator = new BillGeneratorImpl();
         billGenerator.generateListProducts(product1);
         billGenerator.generateListProducts(product2);
         billGenerator.generateListProducts(product3);
