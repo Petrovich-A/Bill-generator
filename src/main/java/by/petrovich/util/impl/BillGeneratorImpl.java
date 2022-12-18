@@ -1,5 +1,6 @@
 package by.petrovich.util.impl;
 
+import by.petrovich.model.Bill;
 import by.petrovich.model.DiscountCard;
 import by.petrovich.model.Product;
 import by.petrovich.util.BillGenerator;
@@ -18,19 +19,34 @@ public class BillGeneratorImpl implements BillGenerator {
     private final String TOTAL_DISCOUNT = "DISCOUNT:";
     private final String END_LINE_SIGHT = "\n";
     private final String DASH_SIGHT = "-";
+    private final String DELIMITER_LINE = "-----------------------------------------------------------------------------";
     private final BillCalculatorImpl billCalculatorImpl = new BillCalculatorImpl();
+
+    public Bill billBuilder(List<Product> products, DiscountCard discountCard) {
+        Bill bill = Bill.newBuilder().withHeader(headerFormation())
+                .withDelimiterLine(delimiterFormation())
+                .withProductRows(productRowsFormation(products))
+                .withDiscountSum(discountSumFormation(discountCard.getPercentOfDiscount()))
+                .withPrisesSumWithDiscount(totalPricesSumFormation(billCalculatorImpl.calculatePrisesSumWithDiscount(products, discountCard.getPercentOfDiscount())))
+                .withTotalPricesSum(totalPricesSumFormation(billCalculatorImpl.calculateDiscountSum(products, discountCard.getPercentOfDiscount())))
+                .withDiscountSum(discountSumFormation(discountCard.getPercentOfDiscount())).build();
+        return bill;
+    }
 
     @Override
     public void printBillAsTable(List<Product> products, DiscountCard discountCard) {
-        printHeader();
-        printDelimiterLine();
-        printRow(products);
-        printDelimiterLine();
+        System.out.print(headerFormation());
+        System.out.print(delimiterFormation());
+        List<String> productsRows = productRowsFormation(products);
+        for (String row : productsRows) {
+            System.out.print(row);
+        }
+        System.out.print(delimiterFormation());
         if (discountCard != null) {
-            printDiscountSum(billCalculatorImpl.calculateDiscountSum(products, discountCard.getPercentOfDiscount()));
-            printTotalPricesSum(billCalculatorImpl.calculatePrisesSumWithDiscount(products, discountCard.getPercentOfDiscount()));
+            System.out.print(discountSumFormation(billCalculatorImpl.calculateDiscountSum(products, discountCard.getPercentOfDiscount())));
+            System.out.print(totalPricesSumFormation(billCalculatorImpl.calculatePrisesSumWithDiscount(products, discountCard.getPercentOfDiscount())));
         } else {
-            printTotalPricesSum(billCalculatorImpl.calculatePrisesSum(products));
+            System.out.print(totalPricesSumFormation(billCalculatorImpl.calculatePrisesSum(products)));
         }
     }
 
@@ -54,33 +70,36 @@ public class BillGeneratorImpl implements BillGenerator {
         return products;
     }
 
-    private void printRow(List<Product> products) {
+    private List<String> productRowsFormation(List<Product> products) {
+        List<String> productRows = new ArrayList<>();
         for (Product product : products) {
-            System.out.format("%3s %20s %10f %10f %s",
-                    product.getQuantity(), product.getName(), product.getPrise(), product.getTotalPrise(), END_LINE_SIGHT);
+            productRows.add(String.format("%3s %20s %10f %10f %s",
+                    product.getQuantity(), product.getName(), product.getPrise(), product.getTotalPrise(), END_LINE_SIGHT));
             if (product.getDiscountAmount() != 0) {
-                System.out.format("%38s %f %s",
-                        DASH_SIGHT, product.getDiscountAmount(), END_LINE_SIGHT);
+                productRows.add((String.format("%38s %f %s",
+                        DASH_SIGHT, product.getDiscountAmount(), END_LINE_SIGHT)));
             }
         }
+        return productRows;
     }
 
-    private void printHeader() {
-        System.out.format("%3s %20s %10s %10s %s",
+    private String headerFormation() {
+        return String.format("%3s %20s %10s %10s %s",
                 QUANTITY, DESCRIPTION, PRICE, TOTAL, END_LINE_SIGHT);
     }
 
-    private void printTotalPricesSum(double totalPrise) {
-        System.out.format("%3s %35f %s",
+    private String totalPricesSumFormation(double totalPrise) {
+        return String.format("%3s %35f %s",
                 TOTAL_SUM, totalPrise, END_LINE_SIGHT);
     }
 
-    private void printDiscountSum(double discountAmount) {
-        System.out.format("%3s %35f %s",
+    private String discountSumFormation(double discountAmount) {
+        return String.format("%3s %35f %s",
                 TOTAL_DISCOUNT, discountAmount, END_LINE_SIGHT);
     }
 
-    private void printDelimiterLine() {
-        System.out.println("-----------------------------------------------------------------------------");
+    private String delimiterFormation() {
+        return String.format("%s %s",
+                DELIMITER_LINE, END_LINE_SIGHT);
     }
 }

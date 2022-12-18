@@ -1,5 +1,6 @@
 package by.petrovich;
 
+import by.petrovich.model.Bill;
 import by.petrovich.model.DiscountCard;
 import by.petrovich.model.Product;
 import by.petrovich.util.BillGenerator;
