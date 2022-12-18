@@ -22,25 +22,25 @@ public class BillGeneratorImpl implements BillGenerator {
     private final String DELIMITER_LINE = "-----------------------------------------------------------------------------";
     private final BillCalculatorImpl billCalculatorImpl = new BillCalculatorImpl();
 
-    public Bill billBuilder(List<Product> products, DiscountCard discountCard) {
+    public Bill billCreator(List<Product> products, DiscountCard discountCard) {
         Bill bill = Bill.newBuilder().withHeader(headerFormation())
                 .withDelimiterLine(delimiterFormation())
                 .withProductRows(productRowsFormation(products))
-                .withDiscountSum(discountSumFormation(discountCard.getPercentOfDiscount()))
-                .withDiscountSum(discountSumFormation(discountCard.getPercentOfDiscount())).build();
+                .withTotalSum(totalSumFormation(products, discountCard.getDiscountPercent()))
+                .build();
         return bill;
     }
 
     @Override
-    public void printBillAsTable(List<Product> products, DiscountCard discountCard) {
-        System.out.print(headerFormation());
-        System.out.print(delimiterFormation());
+    public void printBillAsTable(Bill bill, List<Product> products) {
+        System.out.print(bill.getHeader());
+        System.out.print(bill.getDelimiterLine());
         List<String> productsRows = productRowsFormation(products);
         for (String row : productsRows) {
             System.out.print(row);
         }
-        System.out.print(delimiterFormation());
-        System.out.print(totalSumFormation(products, discountCard));
+        System.out.print(bill.getDelimiterLine());
+        System.out.print(bill.getTotalSum());
     }
 
     @Override
@@ -81,12 +81,12 @@ public class BillGeneratorImpl implements BillGenerator {
                 QUANTITY, DESCRIPTION, PRICE, TOTAL, END_LINE_SIGHT);
     }
 
-    private String totalSumFormation(List<Product> products, DiscountCard discountCard) {
+    private String totalSumFormation(List<Product> products, double discountPercent) {
         String totalSumFormation;
         double totalSum = billCalculatorImpl.calculateTotalSum(products);
-        double totalSumWithDiscount = billCalculatorImpl.calculateTotalSumWithDiscount(products, discountCard.getPercentOfDiscount());
-        double totalDiscountSum = billCalculatorImpl.calculateTotalDiscountSum(products, discountCard.getPercentOfDiscount());
-        if (discountCard != null) {
+        double totalSumWithDiscount = billCalculatorImpl.calculateTotalSumWithDiscount(products, discountPercent);
+        double totalDiscountSum = billCalculatorImpl.calculateTotalDiscountSum(products, discountPercent);
+        if (discountPercent != 0) {
             totalSumFormation = String.format("%3s %35f %s %3s %35f %s",
                     TOTAL_DISCOUNT, totalDiscountSum, END_LINE_SIGHT, TOTAL_SUM, totalSumWithDiscount, END_LINE_SIGHT);
         } else {

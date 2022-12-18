@@ -6,11 +6,7 @@ public class Bill {
     private String header;
     private String delimiterLine;
     private List<String> productsRows;
-    private String discountSum;
-    private String prisesSumWithDiscount;
-    private String discountAmount;
-    private String prisesSum;
-    private String totalPricesSum;
+    private String totalSum;
 
     private Bill() {
     }
@@ -27,24 +23,8 @@ public class Bill {
         return productsRows;
     }
 
-    public String getDiscountSum() {
-        return discountSum;
-    }
-
-    public String getPrisesSumWithDiscount() {
-        return prisesSumWithDiscount;
-    }
-
-    public String getDiscountAmount() {
-        return discountAmount;
-    }
-
-    public String getPrisesSum() {
-        return prisesSum;
-    }
-
-    public String getTotalPricesSum() {
-        return totalPricesSum;
+    public String getTotalSum() {
+        return totalSum;
     }
 
     public static Builder newBuilder() {
@@ -93,57 +73,13 @@ public class Bill {
         }
 
         /**
-         * Sets the {@code discountSum} and returns a reference to this Builder enabling method chaining.
-         *
-         * @param discountSum the {@code discountSum} to set
-         * @return a reference to this Builder
-         */
-        public Builder withDiscountSum(String discountSum) {
-            Bill.this.discountSum = discountSum;
-            return this;
-        }
-
-        /**
-         * Sets the {@code prisesSumWithDiscount} and returns a reference to this Builder enabling method chaining.
-         *
-         * @param prisesSumWithDiscount the {@code prisesSumWithDiscount} to set
-         * @return a reference to this Builder
-         */
-        public Builder withPrisesSumWithDiscount(String prisesSumWithDiscount) {
-            Bill.this.prisesSumWithDiscount = prisesSumWithDiscount;
-            return this;
-        }
-
-        /**
-         * Sets the {@code discountAmount} and returns a reference to this Builder enabling method chaining.
-         *
-         * @param discountAmount the {@code discountAmount} to set
-         * @return a reference to this Builder
-         */
-        public Builder withDiscountAmount(String discountAmount) {
-            Bill.this.discountAmount = discountAmount;
-            return this;
-        }
-
-        /**
-         * Sets the {@code prisesSum} and returns a reference to this Builder enabling method chaining.
-         *
-         * @param prisesSum the {@code prisesSum} to set
-         * @return a reference to this Builder
-         */
-        public Builder withPrisesSum(String prisesSum) {
-            Bill.this.prisesSum = prisesSum;
-            return this;
-        }
-
-        /**
          * Sets the {@code totalPricesSum} and returns a reference to this Builder enabling method chaining.
          *
-         * @param totalPricesSum the {@code totalPricesSum} to set
+         * @param totalSum the {@code totalPricesSum} to set
          * @return a reference to this Builder
          */
-        public Builder withTotalPricesSum(String totalPricesSum) {
-            Bill.this.totalPricesSum = totalPricesSum;
+        public Builder withTotalSum(String totalSum) {
+            Bill.this.totalSum = totalSum;
             return this;
         }
 
@@ -157,11 +93,7 @@ public class Bill {
             bill.header = Bill.this.header;
             bill.delimiterLine = Bill.this.delimiterLine;
             bill.productsRows = Bill.this.productsRows;
-            bill.discountSum = Bill.this.discountSum;
-            bill.prisesSumWithDiscount = Bill.this.prisesSumWithDiscount;
-            bill.discountAmount = Bill.this.discountAmount;
-            bill.prisesSum = Bill.this.prisesSum;
-            bill.totalPricesSum = Bill.this.totalPricesSum;
+            bill.totalSum = Bill.this.totalSum;
             return bill;
         }
     }

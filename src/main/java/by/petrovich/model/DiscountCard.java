@@ -4,11 +4,11 @@ import java.util.Objects;
 
 public class DiscountCard {
     int id;
-    int percentOfDiscount;
+    int discountPercent;
 
-    public DiscountCard(int id, int percentOfDiscount) {
+    public DiscountCard(int id, int discountPercent) {
         this.id = id;
-        this.percentOfDiscount = percentOfDiscount;
+        this.discountPercent = discountPercent;
     }
 
     public int getId() {
@@ -20,12 +20,12 @@ public class DiscountCard {
         return this;
     }
 
-    public int getPercentOfDiscount() {
-        return percentOfDiscount;
+    public int getDiscountPercent() {
+        return discountPercent;
     }
 
-    public DiscountCard setPercentOfDiscount(int percentOfDiscount) {
-        this.percentOfDiscount = percentOfDiscount;
+    public DiscountCard setDiscountPercent(int discountPercent) {
+        this.discountPercent = discountPercent;
         return this;
     }
 
@@ -34,16 +34,16 @@ public class DiscountCard {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         DiscountCard that = (DiscountCard) o;
-        return id == that.id && percentOfDiscount == that.percentOfDiscount;
+        return id == that.id && discountPercent == that.discountPercent;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, percentOfDiscount);
+        return Objects.hash(id, discountPercent);
     }
 
     @Override
     public String toString() {
-        return String.format("DiscountCard [                 id=%d            ,                 percentOfDiscount=%d    ]", id, percentOfDiscount);
+        return String.format("DiscountCard [                 id=%d            ,                 percentOfDiscount=%d    ]", id, discountPercent);
     }
 }
