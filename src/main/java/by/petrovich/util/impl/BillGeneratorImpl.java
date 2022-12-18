@@ -27,8 +27,6 @@ public class BillGeneratorImpl implements BillGenerator {
                 .withDelimiterLine(delimiterFormation())
                 .withProductRows(productRowsFormation(products))
                 .withDiscountSum(discountSumFormation(discountCard.getPercentOfDiscount()))
-                .withPrisesSumWithDiscount(totalPricesSumFormation(billCalculatorImpl.calculatePrisesSumWithDiscount(products, discountCard.getPercentOfDiscount())))
-                .withTotalPricesSum(totalPricesSumFormation(billCalculatorImpl.calculateDiscountSum(products, discountCard.getPercentOfDiscount())))
                 .withDiscountSum(discountSumFormation(discountCard.getPercentOfDiscount())).build();
         return bill;
     }
@@ -42,12 +40,7 @@ public class BillGeneratorImpl implements BillGenerator {
             System.out.print(row);
         }
         System.out.print(delimiterFormation());
-        if (discountCard != null) {
-            System.out.print(discountSumFormation(billCalculatorImpl.calculateDiscountSum(products, discountCard.getPercentOfDiscount())));
-            System.out.print(totalPricesSumFormation(billCalculatorImpl.calculatePrisesSumWithDiscount(products, discountCard.getPercentOfDiscount())));
-        } else {
-            System.out.print(totalPricesSumFormation(billCalculatorImpl.calculatePrisesSum(products)));
-        }
+        System.out.print(totalSumFormation(products, discountCard));
     }
 
     @Override
@@ -62,7 +55,7 @@ public class BillGeneratorImpl implements BillGenerator {
         for (Product product : products) {
             if (product.getQuantity() > QUANTITY_FOR_GETTING_DISCOUNT && product.isOnSale()) {
                 product.setTotalPrise(billCalculatorImpl.calculatePriseWithDiscount(product.getPrise(), DISCOUNT_PERCENT_FOR_PRODUCTS_ON_SALE));
-                product.setDiscountAmount(billCalculatorImpl.calculateDiscountAmount(product.getPrise(), DISCOUNT_PERCENT_FOR_PRODUCTS_ON_SALE));
+                product.setDiscountAmount(billCalculatorImpl.calculateDiscountValue(product.getPrise(), DISCOUNT_PERCENT_FOR_PRODUCTS_ON_SALE));
             } else {
                 product.setTotalPrise(billCalculatorImpl.calculatePrise(product.getPrise(), product.getQuantity()));
             }
@@ -88,9 +81,19 @@ public class BillGeneratorImpl implements BillGenerator {
                 QUANTITY, DESCRIPTION, PRICE, TOTAL, END_LINE_SIGHT);
     }
 
-    private String totalPricesSumFormation(double totalPrise) {
-        return String.format("%3s %35f %s",
-                TOTAL_SUM, totalPrise, END_LINE_SIGHT);
+    private String totalSumFormation(List<Product> products, DiscountCard discountCard) {
+        String totalSumFormation;
+        double totalSum = billCalculatorImpl.calculateTotalSum(products);
+        double totalSumWithDiscount = billCalculatorImpl.calculateTotalSumWithDiscount(products, discountCard.getPercentOfDiscount());
+        double totalDiscountSum = billCalculatorImpl.calculateTotalDiscountSum(products, discountCard.getPercentOfDiscount());
+        if (discountCard != null) {
+            totalSumFormation = String.format("%3s %35f %s %3s %35f %s",
+                    TOTAL_DISCOUNT, totalDiscountSum, END_LINE_SIGHT, TOTAL_SUM, totalSumWithDiscount, END_LINE_SIGHT);
+        } else {
+            totalSumFormation = String.format("%3s %35f %s ",
+                    TOTAL_SUM, totalSum, END_LINE_SIGHT);
+        }
+        return totalSumFormation;
     }
 
     private String discountSumFormation(double discountAmount) {
@@ -102,4 +105,5 @@ public class BillGeneratorImpl implements BillGenerator {
         return String.format("%s %s",
                 DELIMITER_LINE, END_LINE_SIGHT);
     }
+
 }

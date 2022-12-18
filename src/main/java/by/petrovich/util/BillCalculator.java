@@ -9,11 +9,11 @@ public interface BillCalculator {
 
     double calculatePriseWithDiscount(double prise, double discountPercent);
 
-    double calculateDiscountAmount(double prise, double discountPercent);
+    double calculateDiscountValue(double prise, double discountPercent);
 
-    double calculatePrisesSum(List<Product> products);
+    double calculateTotalSum(List<Product> products);
 
-    double calculateDiscountSum(List<Product> products, double discountPercent);
+    double calculateTotalDiscountSum(List<Product> products, double discountPercent);
 
-    double calculatePrisesSumWithDiscount(List<Product> products, double discountPercent);
+    double calculateTotalSumWithDiscount(List<Product> products, double discountPercent);
 }

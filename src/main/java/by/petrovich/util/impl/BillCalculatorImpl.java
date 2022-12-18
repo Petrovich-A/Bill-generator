@@ -16,12 +16,12 @@ public class BillCalculatorImpl implements BillCalculator {
     }
 
     @Override
-    public double calculateDiscountAmount(double prise, double discountPercent) {
+    public double calculateDiscountValue(double prise, double discountPercent) {
         return prise * discountPercent / 100;
     }
 
     @Override
-    public double calculatePrisesSum(List<Product> products) {
+    public double calculateTotalSum(List<Product> products) {
         double prisesSum = 0.0;
         for (Product product : products) {
             prisesSum += product.getTotalPrise();
@@ -30,16 +30,16 @@ public class BillCalculatorImpl implements BillCalculator {
     }
 
     @Override
-    public double calculateDiscountSum(List<Product> products, double discountPercent) {
-        double discountSum = 0.0;
-        for (Product product : products) {
-            discountSum += calculateDiscountAmount(product.getTotalPrise(), discountPercent);
-        }
-        return discountSum;
+    public double calculateTotalSumWithDiscount(List<Product> products, double discountPercent) {
+        return calculateTotalSum(products) - calculateTotalDiscountSum(products, discountPercent);
     }
 
     @Override
-    public double calculatePrisesSumWithDiscount(List<Product> products, double discountPercent) {
-        return calculatePrisesSum(products) - calculateDiscountSum(products, discountPercent);
+    public double calculateTotalDiscountSum(List<Product> products, double discountPercent) {
+        double discountSum = 0.0;
+        for (Product product : products) {
+            discountSum += calculateDiscountValue(product.getTotalPrise(), discountPercent);
+        }
+        return discountSum;
     }
 }
