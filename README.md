@@ -3,6 +3,9 @@
   <img src=![img.png](img.png) alt="logo" width="200" height="auto" />
   <h1>Bill generator app</h1>
 
+<img src="https://github.com/Petrovich-A/JavaFX/blob/master/gif/Employee-Management.png"
+alt="logo" width="400" height="auto" />
+
   <p>
     An awesome test task special for Clever Technology! 
   </p>
@@ -26,7 +29,7 @@
 <img alt="GitHub commit activity" src="https://img.shields.io/github/commit-activity/m/Petrovich-A/Bill-generator">
 </a>
 </p>
-
+</div>
 <br />
 
 <!-- Table of Contents -->
