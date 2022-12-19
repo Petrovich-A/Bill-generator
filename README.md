@@ -2,7 +2,7 @@
 
   <img src=![img.png](img.png) alt="logo" width="200" height="auto" />
   <h1>Bill generator app</h1>
-![img_1.png](img_1.png)
+
   <p>
     An awesome test task special for Clever Technology! 
   </p>
