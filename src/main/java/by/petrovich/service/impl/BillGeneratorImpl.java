@@ -1,9 +1,10 @@
-package by.petrovich.util.impl;
+package by.petrovich.service.impl;
 
 import by.petrovich.model.Bill;
 import by.petrovich.model.DiscountCard;
 import by.petrovich.model.Product;
-import by.petrovich.util.BillGenerator;
+import by.petrovich.service.BillCalculator;
+import by.petrovich.service.BillGenerator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,45 +21,26 @@ public class BillGeneratorImpl implements BillGenerator {
     private final String END_LINE_SIGHT = "\n";
     private final String DASH_SIGHT = "-";
     private final String DELIMITER_LINE = "-----------------------------------------------------------------------------";
-    private final BillCalculatorImpl billCalculatorImpl = new BillCalculatorImpl();
+    private final BillCalculator billCalculator = new BillCalculatorImpl();
 
     @Override
     public Bill billCreator(List<Product> products, DiscountCard discountCard) {
-        Bill bill = Bill.newBuilder().withHeader(headerFormation())
+        return Bill.newBuilder()
+                .withHeader(headerFormation())
                 .withDelimiterLine(delimiterFormation())
                 .withProductRows(productRowsFormation(products))
                 .withTotalSum(totalSumFormation(products, discountCard.getDiscountPercent()))
                 .build();
-        return bill;
     }
 
     @Override
-    public void printBillAsTable(Bill bill, List<Product> products) {
-        System.out.print(bill.getHeader());
-        System.out.print(bill.getDelimiterLine());
-        List<String> productsRows = productRowsFormation(products);
-        for (String row : productsRows) {
-            System.out.print(row);
-        }
-        System.out.print(bill.getDelimiterLine());
-        System.out.print(bill.getTotalSum());
-    }
-
-    @Override
-    public List<Product> generateListProducts(Product product) {
-        List<Product> products = new ArrayList<>();
-        products.add(product);
-        return products;
-    }
-
-    @Override
-    public List<Product> putTotalPrises(List<Product> products) {
+    public List<Product> determineTotalPrises(List<Product> products) {
         for (Product product : products) {
             if (product.getQuantity() > QUANTITY_FOR_GETTING_DISCOUNT && product.isOnSale()) {
-                product.setTotalPrise(billCalculatorImpl.calculatePriseWithDiscount(product.getPrise(), DISCOUNT_PERCENT_FOR_PRODUCTS_ON_SALE));
-                product.setDiscountAmount(billCalculatorImpl.calculateDiscountValue(product.getPrise(), DISCOUNT_PERCENT_FOR_PRODUCTS_ON_SALE));
+                product.setTotalPrise(billCalculator.calculatePriseWithDiscount(product.getPrise(), DISCOUNT_PERCENT_FOR_PRODUCTS_ON_SALE));
+                product.setDiscountAmount(billCalculator.calculateDiscountValue(product.getPrise(), DISCOUNT_PERCENT_FOR_PRODUCTS_ON_SALE));
             } else {
-                product.setTotalPrise(billCalculatorImpl.calculatePrise(product.getPrise(), product.getQuantity()));
+                product.setTotalPrise(billCalculator.calculatePrise(product.getPrise(), product.getQuantity()));
             }
         }
         return products;
@@ -67,14 +49,18 @@ public class BillGeneratorImpl implements BillGenerator {
     private List<String> productRowsFormation(List<Product> products) {
         List<String> productRows = new ArrayList<>();
         for (Product product : products) {
-            productRows.add(String.format("%3s %20s %10f %10f %s",
-                    product.getQuantity(), product.getName(), product.getPrise(), product.getTotalPrise(), END_LINE_SIGHT));
+            addProductRow(productRows, product);
             if (product.getDiscountAmount() != 0) {
                 productRows.add((String.format("%38s %f %s",
                         DASH_SIGHT, product.getDiscountAmount(), END_LINE_SIGHT)));
             }
         }
         return productRows;
+    }
+
+    private void addProductRow(List<String> productRows, Product product) {
+        productRows.add(String.format("%3s %20s %10f %10f %s",
+                product.getQuantity(), product.getName(), product.getPrise(), product.getTotalPrise(), END_LINE_SIGHT));
     }
 
     private String headerFormation() {
@@ -84,9 +70,9 @@ public class BillGeneratorImpl implements BillGenerator {
 
     private String totalSumFormation(List<Product> products, double discountPercent) {
         String totalSumFormation;
-        double totalSum = billCalculatorImpl.calculateTotalSum(products);
-        double totalSumWithDiscount = billCalculatorImpl.calculateTotalSumWithDiscount(products, discountPercent);
-        double totalDiscountSum = billCalculatorImpl.calculateTotalDiscountSum(products, discountPercent);
+        double totalSum = billCalculator.calculateTotalSum(products);
+        double totalSumWithDiscount = billCalculator.calculateTotalSumWithDiscount(products, discountPercent);
+        double totalDiscountSum = billCalculator.calculateTotalDiscountSum(products, discountPercent);
         if (discountPercent != 0) {
             totalSumFormation = String.format("%3s %35f %s %3s %35f %s",
                     TOTAL_DISCOUNT, totalDiscountSum, END_LINE_SIGHT, TOTAL_SUM, totalSumWithDiscount, END_LINE_SIGHT);

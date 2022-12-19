@@ -3,10 +3,10 @@ package by.petrovich;
 import by.petrovich.model.Bill;
 import by.petrovich.model.DiscountCard;
 import by.petrovich.model.Product;
-import by.petrovich.util.FileWriter;
-import by.petrovich.util.impl.BillGeneratorImpl;
+import by.petrovich.service.impl.ConsoleWriter;
+import by.petrovich.service.impl.FileWriter;
+import by.petrovich.service.impl.BillGeneratorImpl;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -14,14 +14,14 @@ import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
-        Map<Integer, Integer> initialData = new HashMap<>();
-        initialData.put(1, 2);
-        initialData.put(2, 3);
-        initialData.put(3, 6);
+        Map<Integer, Integer> idToQuantity = new HashMap<>();
+        idToQuantity.put(1, 2);
+        idToQuantity.put(2, 3);
+        idToQuantity.put(3, 6);
         DiscountCard discountCard = new DiscountCard(1234, 10);
 
         List<Product> products = new ArrayList<>();
-        for (Map.Entry<Integer, Integer> value : initialData.entrySet()) {
+        for (Map.Entry<Integer, Integer> value : idToQuantity.entrySet()) {
             products.add(new Product(value.getKey(), value.getValue()));
         }
         Product product1 = products.get(0);
@@ -38,16 +38,13 @@ public class Main {
         product3.setPrise(12.7);
 
         BillGeneratorImpl billGenerator = new BillGeneratorImpl();
-        billGenerator.generateListProducts(product1);
-        billGenerator.generateListProducts(product2);
-        billGenerator.generateListProducts(product3);
-        List<Product> productsFull = billGenerator.putTotalPrises(products);
+        List<Product> productsFull = billGenerator.determineTotalPrises(products);
         System.out.println(productsFull);
         Bill bill = billGenerator.billCreator(productsFull, discountCard);
-        billGenerator.printBillAsTable(bill, productsFull);
+        ConsoleWriter consoleWriter = new ConsoleWriter();
+        consoleWriter.writeFile(bill);
 
         FileWriter fileWriter = new FileWriter();
-        File file = new File("src/main/resources/outPut.txt");
-        fileWriter.writeFile(bill, file);
+        fileWriter.writeFile(bill);
     }
 }

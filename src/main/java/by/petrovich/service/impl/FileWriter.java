@@ -1,6 +1,7 @@
-package by.petrovich.util;
+package by.petrovich.service.impl;
 
 import by.petrovich.model.Bill;
+import by.petrovich.service.FilePusher;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -10,10 +11,16 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 
-public class FileWriter {
-private static final Logger LOGGER = LogManager.getLogger();
-    public void writeFile(Bill bill, File file) {
-        try (FileOutputStream fileOutputStream = new FileOutputStream(file);
+public class FileWriter implements FilePusher {
+    private static final Logger LOGGER = LogManager.getLogger();
+    private final String PATH_TO_FILE = "src/main/resources/outPut.txt";
+
+    /**
+     * @param bill
+     */
+    @Override
+    public void writeFile(Bill bill) {
+        try (FileOutputStream fileOutputStream = new FileOutputStream(PATH_TO_FILE);
              ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream)) {
             objectOutputStream.writeObject(bill.toString());
             objectOutputStream.flush();
@@ -22,5 +29,4 @@ private static final Logger LOGGER = LogManager.getLogger();
             throw new RuntimeException(e);
         }
     }
-
 }

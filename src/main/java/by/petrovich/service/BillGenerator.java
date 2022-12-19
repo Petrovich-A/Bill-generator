@@ -1,4 +1,4 @@
-package by.petrovich.util;
+package by.petrovich.service;
 
 import by.petrovich.model.Bill;
 import by.petrovich.model.DiscountCard;
@@ -9,10 +9,6 @@ import java.util.List;
 public interface BillGenerator {
     Bill billCreator(List<Product> products, DiscountCard discountCard);
 
-    void printBillAsTable(Bill bill, List<Product> products);
-
-    List<Product> generateListProducts(Product product);
-
-    List<Product> putTotalPrises(List<Product> products);
+    List<Product> determineTotalPrises(List<Product> products);
 
 }
