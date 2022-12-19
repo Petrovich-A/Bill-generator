@@ -1,8 +1,10 @@
 package by.petrovich.model;
 
+import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 
-public class Bill {
+public class Bill implements Serializable {
     private String header;
     private String delimiterLine;
     private List<String> productsRows;
@@ -29,6 +31,30 @@ public class Bill {
 
     public static Builder newBuilder() {
         return new Bill().new Builder();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Bill bill = (Bill) o;
+        return Objects.equals(header, bill.header) && Objects.equals(delimiterLine, bill.delimiterLine) && Objects.equals(productsRows, bill.productsRows) && Objects.equals(totalSum, bill.totalSum);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(header, delimiterLine, productsRows, totalSum);
+    }
+
+    @Override
+    public String toString() {
+        final StringBuffer stringBuffer = new StringBuffer(header);
+        stringBuffer.append(delimiterLine);
+        for (String row : productsRows) {
+            stringBuffer.append(row);
+        }
+        stringBuffer.append(totalSum);
+        return stringBuffer.toString();
     }
 
     /**

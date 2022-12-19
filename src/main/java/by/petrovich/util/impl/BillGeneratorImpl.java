@@ -77,8 +77,8 @@ public class BillGeneratorImpl implements BillGenerator {
     }
 
     private String headerFormation() {
-        return String.format("%3s %20s %10s %10s %s",
-                QUANTITY, DESCRIPTION, PRICE, TOTAL, END_LINE_SIGHT);
+        return String.format("%s %3s %20s %10s %10s %s",
+                END_LINE_SIGHT, QUANTITY, DESCRIPTION, PRICE, TOTAL, END_LINE_SIGHT);
     }
 
     private String totalSumFormation(List<Product> products, double discountPercent) {

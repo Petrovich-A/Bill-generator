@@ -3,9 +3,10 @@ package by.petrovich;
 import by.petrovich.model.Bill;
 import by.petrovich.model.DiscountCard;
 import by.petrovich.model.Product;
-import by.petrovich.util.BillGenerator;
+import by.petrovich.util.FileWriter;
 import by.petrovich.util.impl.BillGeneratorImpl;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -42,7 +43,11 @@ public class Main {
         billGenerator.generateListProducts(product3);
         List<Product> productsFull = billGenerator.putTotalPrises(products);
         System.out.println(productsFull);
-        billGenerator.printBillAsTable(productsFull, discountCard);
+        Bill bill = billGenerator.billCreator(productsFull, discountCard);
+        billGenerator.printBillAsTable(bill, productsFull);
 
+        FileWriter fileWriter = new FileWriter();
+        File file = new File("src/main/resources/outPut.txt");
+        fileWriter.writeFile(bill, file);
     }
 }
