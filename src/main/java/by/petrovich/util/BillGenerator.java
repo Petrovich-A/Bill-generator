@@ -7,6 +7,8 @@ import by.petrovich.model.Product;
 import java.util.List;
 
 public interface BillGenerator {
+    Bill billCreator(List<Product> products, DiscountCard discountCard);
+
     void printBillAsTable(Bill bill, List<Product> products);
 
     List<Product> generateListProducts(Product product);

@@ -22,6 +22,7 @@ public class BillGeneratorImpl implements BillGenerator {
     private final String DELIMITER_LINE = "-----------------------------------------------------------------------------";
     private final BillCalculatorImpl billCalculatorImpl = new BillCalculatorImpl();
 
+    @Override
     public Bill billCreator(List<Product> products, DiscountCard discountCard) {
         Bill bill = Bill.newBuilder().withHeader(headerFormation())
                 .withDelimiterLine(delimiterFormation())
