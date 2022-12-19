@@ -4,13 +4,13 @@ import java.util.Objects;
 import java.util.StringJoiner;
 
 public class Product {
-    int id;
-    String name;
-    int quantity;
-    double prise;
-    double totalPrise;
-    boolean isOnSale;
-    double discountAmount;
+   private int id;
+   private String name;
+   private int quantity;
+   private double prise;
+   private double totalPrise;
+   private boolean isOnSale;
+   private double discountAmount;
 
     public Product(int id, int quantity) {
         this.id = id;

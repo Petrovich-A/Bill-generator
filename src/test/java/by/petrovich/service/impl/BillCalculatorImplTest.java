@@ -1,6 +1,7 @@
-package by.petrovich.util.impl;
+package by.petrovich.service.impl;
 
 import by.petrovich.model.Product;
+import by.petrovich.service.BillCalculator;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -8,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 class BillCalculatorImplTest {
-    private BillCalculatorImpl billCalculator = new BillCalculatorImpl();
+    private final BillCalculator billCalculator = new BillCalculatorImpl();
 
     @Test
     void calculatePrise() {

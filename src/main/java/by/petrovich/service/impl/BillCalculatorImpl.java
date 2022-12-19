@@ -1,7 +1,7 @@
-package by.petrovich.util.impl;
+package by.petrovich.service.impl;
 
 import by.petrovich.model.Product;
-import by.petrovich.util.BillCalculator;
+import by.petrovich.service.BillCalculator;
 
 import java.text.DecimalFormat;
 import java.util.List;

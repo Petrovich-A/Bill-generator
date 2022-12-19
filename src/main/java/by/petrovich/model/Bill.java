@@ -5,16 +5,16 @@ import java.util.List;
 import java.util.Objects;
 
 public class Bill implements Serializable {
-    private String header;
+    private String headerLine;
     private String delimiterLine;
     private List<String> productsRows;
-    private String totalSum;
+    private String totalSumLine;
 
     private Bill() {
     }
 
-    public String getHeader() {
-        return header;
+    public String getHeaderLine() {
+        return headerLine;
     }
 
     public String getDelimiterLine() {
@@ -25,8 +25,8 @@ public class Bill implements Serializable {
         return productsRows;
     }
 
-    public String getTotalSum() {
-        return totalSum;
+    public String getTotalSumLine() {
+        return totalSumLine;
     }
 
     public static Builder newBuilder() {
@@ -38,22 +38,22 @@ public class Bill implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Bill bill = (Bill) o;
-        return Objects.equals(header, bill.header) && Objects.equals(delimiterLine, bill.delimiterLine) && Objects.equals(productsRows, bill.productsRows) && Objects.equals(totalSum, bill.totalSum);
+        return Objects.equals(headerLine, bill.headerLine) && Objects.equals(delimiterLine, bill.delimiterLine) && Objects.equals(productsRows, bill.productsRows) && Objects.equals(totalSumLine, bill.totalSumLine);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(header, delimiterLine, productsRows, totalSum);
+        return Objects.hash(headerLine, delimiterLine, productsRows, totalSumLine);
     }
 
     @Override
     public String toString() {
-        final StringBuffer stringBuffer = new StringBuffer(header);
-        stringBuffer.append(delimiterLine);
+        final StringBuffer stringBuffer = new StringBuffer();
+        stringBuffer.append(headerLine).append(delimiterLine);
         for (String row : productsRows) {
             stringBuffer.append(row);
         }
-        stringBuffer.append(totalSum);
+        stringBuffer.append(totalSumLine);
         return stringBuffer.toString();
     }
 
@@ -72,7 +72,7 @@ public class Bill implements Serializable {
          * @return a reference to this Builder
          */
         public Builder withHeader(String header) {
-            Bill.this.header = header;
+            Bill.this.headerLine = header;
             return this;
         }
 
@@ -105,7 +105,7 @@ public class Bill implements Serializable {
          * @return a reference to this Builder
          */
         public Builder withTotalSum(String totalSum) {
-            Bill.this.totalSum = totalSum;
+            Bill.this.totalSumLine = totalSum;
             return this;
         }
 
@@ -116,10 +116,10 @@ public class Bill implements Serializable {
          */
         public Bill build() {
             Bill bill = new Bill();
-            bill.header = Bill.this.header;
+            bill.headerLine = Bill.this.headerLine;
             bill.delimiterLine = Bill.this.delimiterLine;
             bill.productsRows = Bill.this.productsRows;
-            bill.totalSum = Bill.this.totalSum;
+            bill.totalSumLine = Bill.this.totalSumLine;
             return bill;
         }
     }

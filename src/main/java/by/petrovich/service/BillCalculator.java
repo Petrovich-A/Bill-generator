@@ -1,4 +1,4 @@
-package by.petrovich.util;
+package by.petrovich.service;
 
 import by.petrovich.model.Product;
 

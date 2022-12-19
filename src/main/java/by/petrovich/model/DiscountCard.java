@@ -3,8 +3,8 @@ package by.petrovich.model;
 import java.util.Objects;
 
 public class DiscountCard {
-    int id;
-    int discountPercent;
+    private int id;
+    private int discountPercent;
 
     public DiscountCard(int id, int discountPercent) {
         this.id = id;
