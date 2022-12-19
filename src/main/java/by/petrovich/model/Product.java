@@ -17,6 +17,10 @@ public class Product {
         this.quantity = quantity;
     }
 
+    public Product(double totalPrise) {
+        this.totalPrise = totalPrise;
+    }
+
     public Product(int id, String name, int quantity, double prise, double totalPrise, boolean isOnSale, double discountAmount) {
         this.id = id;
         this.name = name;

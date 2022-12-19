@@ -3,6 +3,7 @@ package by.petrovich.util.impl;
 import by.petrovich.model.Product;
 import by.petrovich.util.BillCalculator;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 public class BillCalculatorImpl implements BillCalculator {
@@ -12,7 +13,10 @@ public class BillCalculatorImpl implements BillCalculator {
     }
 
     public double calculatePriseWithDiscount(double prise, double discountPercent) {
-        return prise - prise * discountPercent / 100;
+        DecimalFormat decimalFormat = new DecimalFormat("0.00");
+        double priseWithDiscount = prise - calculateDiscountValue(prise, discountPercent);
+        String format =  decimalFormat.format(priseWithDiscount);
+        return Double.parseDouble(format.replace(",", "."));
     }
 
     @Override

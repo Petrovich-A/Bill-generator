@@ -96,11 +96,6 @@ public class BillGeneratorImpl implements BillGenerator {
         return totalSumFormation;
     }
 
-    private String discountSumFormation(double discountAmount) {
-        return String.format("%3s %35f %s",
-                TOTAL_DISCOUNT, discountAmount, END_LINE_SIGHT);
-    }
-
     private String delimiterFormation() {
         return String.format("%s %s",
                 DELIMITER_LINE, END_LINE_SIGHT);
