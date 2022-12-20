@@ -43,16 +43,14 @@ public class DiscountCardDaoImpl implements DiscountCardDao {
      */
     @Override
     public DiscountCard readDiscountCardById(int id) {
-        DiscountCard discountCard;
         try (Connection connection = dataBaseConnector.receiveConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(QUERY_READ_DISCOUNT_CARD_BY_ID);
             preparedStatement.setInt(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
-            discountCard = discountCardMapper(resultSet);
+            return discountCardMapper(resultSet);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return discountCard;
     }
 
     /**
@@ -61,16 +59,14 @@ public class DiscountCardDaoImpl implements DiscountCardDao {
      */
     @Override
     public DiscountCard readDiscountCardByNumber(int number) {
-        DiscountCard discountCard;
         try (Connection connection = dataBaseConnector.receiveConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(QUERY_READ_DISCOUNT_CARD_BY_NUMBER);
             preparedStatement.setInt(1, number);
             ResultSet resultSet = preparedStatement.executeQuery();
-            discountCard = discountCardMapper(resultSet);
+            return discountCardMapper(resultSet);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return discountCard;
     }
 
     private List<DiscountCard> discountCardsMapper(ResultSet resultSet) throws SQLException {
