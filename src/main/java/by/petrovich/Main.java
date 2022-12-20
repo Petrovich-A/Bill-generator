@@ -4,9 +4,8 @@ import by.petrovich.model.Bill;
 import by.petrovich.model.DiscountCard;
 import by.petrovich.model.Product;
 import by.petrovich.service.DiscountCardService;
-import by.petrovich.service.impl.ConsoleWriter;
-import by.petrovich.service.impl.FileWriter;
-import by.petrovich.service.impl.BillGeneratorImpl;
+import by.petrovich.service.ProductService;
+import by.petrovich.service.impl.*;
 
 import java.util.*;
 
@@ -45,9 +44,15 @@ public class Main {
         FileWriter fileWriter = new FileWriter();
         fileWriter.writeFile(bill);
 
-        DiscountCardService discountCardService = new DiscountCardService();
+        DiscountCardService discountCardService = new DiscountCardServiceImpl();
         List<DiscountCard> discountCardsFromDB = discountCardService.receiveAllDiscountCards();
         discountCardsFromDB.forEach(discountCardFromDB -> System.out.println(discountCardFromDB.toString()));
+
+        ProductService productService = new ProductServiceImpl();
+        Bill bill1 = productService.receiveBill(1, 3, 1234);
+
+        FileWriter fileWriter1 = new FileWriter();
+        fileWriter1.writeFile(bill1);
 
 
     }

@@ -6,18 +6,15 @@ import by.petrovich.model.DiscountCard;
 
 import java.util.List;
 
-public class DiscountCardService {
-    private final DiscountCardDao discountCardDao = new DiscountCardDaoImpl();
+public interface DiscountCardService {
+    DiscountCardDao discountCardDao = new DiscountCardDaoImpl();
 
-    public List<DiscountCard> receiveAllDiscountCards() {
-        return discountCardDao.readAllDiscountCards();
-    }
+    List<DiscountCard> receiveAllDiscountCards();
 
-    public DiscountCard readDiscountCardById(int id) {
-        return discountCardDao.readDiscountCardById(id);
-    }
 
-    public DiscountCard readDiscountCardByNumber(int number) {
-        return discountCardDao.readDiscountCardByNumber(number);
-    }
+    DiscountCard readDiscountCardById(int id);
+
+
+    DiscountCard readDiscountCardByNumber(int number);
+
 }

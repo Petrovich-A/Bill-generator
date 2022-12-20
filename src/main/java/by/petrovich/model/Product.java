@@ -17,6 +17,9 @@ public class Product {
         this.quantity = quantity;
     }
 
+    public Product() {
+    }
+
     public Product(double totalPrise) {
         this.totalPrise = totalPrise;
     }
