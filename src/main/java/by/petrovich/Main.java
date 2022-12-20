@@ -3,14 +3,12 @@ package by.petrovich;
 import by.petrovich.model.Bill;
 import by.petrovich.model.DiscountCard;
 import by.petrovich.model.Product;
+import by.petrovich.service.DiscountCardService;
 import by.petrovich.service.impl.ConsoleWriter;
 import by.petrovich.service.impl.FileWriter;
 import by.petrovich.service.impl.BillGeneratorImpl;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -46,5 +44,11 @@ public class Main {
 
         FileWriter fileWriter = new FileWriter();
         fileWriter.writeFile(bill);
+
+        DiscountCardService discountCardService = new DiscountCardService();
+        List<DiscountCard> discountCardsFromDB = discountCardService.receiveAllDiscountCards();
+        discountCardsFromDB.forEach(discountCardFromDB -> System.out.println(discountCardFromDB.toString()));
+
+
     }
 }

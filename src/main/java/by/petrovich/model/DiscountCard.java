@@ -11,6 +11,10 @@ public class DiscountCard {
         this.discountPercent = discountPercent;
     }
 
+    public DiscountCard() {
+
+    }
+
     public int getId() {
         return id;
     }
@@ -44,6 +48,10 @@ public class DiscountCard {
 
     @Override
     public String toString() {
-        return String.format("DiscountCard [                 id=%d            ,                 percentOfDiscount=%d    ]", id, discountPercent);
+        final StringBuffer sb = new StringBuffer("DiscountCard{");
+        sb.append("id=").append(id);
+        sb.append(", discountPercent=").append(discountPercent);
+        sb.append('}');
+        return sb.toString();
     }
 }
