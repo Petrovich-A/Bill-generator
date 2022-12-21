@@ -14,6 +14,7 @@ alt="logo" width="600" height="auto" />
 <a>
 <img alt="Coveralls" src="https://img.shields.io/coverallsCoverage/github/Petrovich-A/Bill-generator">
 </a>
+<img alt="AppVeyor tests (branch)" src="https://img.shields.io/appveyor/tests/Petrovich-A/Bill-generator/bill_generate">
 <a>
 <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/Petrovich-A/Bill-generator">
 </a>
@@ -35,15 +36,11 @@ alt="logo" width="600" height="auto" />
 # :notebook_with_decorative_cover: Table of Contents
 
 - [About the Project](#star2-about-the-project)
-    * [Screenshots](#camera-screenshots)
     * [Tech Stack](#space_invader-tech-stack)
 - [Getting Started](#toolbox-getting-started)
     * [Running Tests](#test_tube-running-tests)
     * [Run Locally](#running-run-locally)
-    * [Deployment](#triangular_flag_on_post-deployment)
-- [Usage](#eyes-usage)
 - [Roadmap](#compass-roadmap)
-    * [Code of Conduct](#scroll-code-of-conduct)
 - [License](#warning-license)
 - [Contact](#handshake-contact)
 
@@ -51,16 +48,8 @@ alt="logo" width="600" height="auto" />
 
 ## :star2: About the Project
 
-The developed application implements the functionality of generating a check in the store.
-
-<!-- Screenshots -->
-
-### :camera: Screenshots
-
-<div align="center"> 
-  <img src="https://placehold.co/600x400?text=Your+Screenshot+here" alt="screenshot" />
-</div>
-
+The developed application allows to generate an imitation of a store receipt (bill) with goods. The input data takes a set of parameters in the format <itemId-quantity> (itemId is the identifier of the product, quantity is its quantity. For example: 3-1, 2-5, 5-1. Card-1234 is also passed. Card-1234 means that a discount card with number 1234 has been found. 
+As a result of the application's operation, the generated receipt is print in console or to a file.
 
 <!-- TechStack -->
 
@@ -74,23 +63,9 @@ The developed application implements the functionality of generating a check in 
 </details>
 
 <details>
-  <summary>Server</summary>
-  <ul>
-    <li><a href="https://www.typescriptlang.org/">Typescript</a></li>
-    <li><a href="https://expressjs.com/">Express.js</a></li>
-    <li><a href="https://go.dev/">Golang</a></li>
-    <li><a href="https://nestjs.com/">Nest.js</a></li>
-    <li><a href="https://socket.io/">SocketIO</a></li>
-    <li><a href="https://www.prisma.io/">Prisma</a></li>    
-    <li><a href="https://www.apollographql.com/">Apollo</a></li>
-    <li><a href="https://graphql.org/">GraphQL</a></li>
-  </ul>
-</details>
-
-<details>
 <summary>Database</summary>
   <ul>
-    <li><a href="https://www.postgresql.org/">PostgreSQL</a></li>
+    <li><a href="MySQL">MySQL</a></li>
   </ul>
 </details>
 
@@ -101,38 +76,9 @@ The developed application implements the functionality of generating a check in 
   </ul>
 </details>
 
-<!-- Features -->
-
-### :dart: Features
-
-- Feature 1
-- Feature 2
-- Feature 3
-
 <!-- Getting Started -->
 
 ## :toolbox: Getting Started
-
-<!-- Prerequisites -->
-
-### :bangbang: Prerequisites
-
-This project uses Yarn as package manager
-
-```bash
- npm install --global yarn
-```
-
-<!-- Installation -->
-
-### :gear: Installation
-
-Install my-project with npm
-
-```bash
-  yarn install my-project
-  cd my-project
-```
 
 <!-- Running Tests -->
 
@@ -151,124 +97,48 @@ To run tests, run the following command
 Clone the project
 
 ```bash
-  git clone https://github.com/Louis3797/awesome-readme-template.git
-```
-
-Go to the project directory
-
-```bash
-  cd my-project
+  git clone https://github.com/Petrovich-A/Bill-generator
 ```
 
 Install dependencies
 
 ```bash
-  yarn install
-```
-
-Start the server
-
-```bash
-  yarn start
-```
-
-<!-- Deployment -->
-
-### :triangular_flag_on_post: Deployment
-
-To deploy this project run
-
-```bash
-  yarn deploy
-```
-
-<!-- Usage -->
-
-## :eyes: Usage
-
-Use this space to tell a little more about your project and how it can be used. Show additional screenshots, code
-samples, demos or link to other resources.
-
-```javascript
-import Component from 'my-project'
-
-function App() {
-    return <Component/>
-}
+  gradle --refresh-dependencies
 ```
 
 <!-- Roadmap -->
 
 ## :compass: Roadmap
 
-* [x] Приложение запускается java RunnerClassName <набор_параметров>, где набор параметров в формате itemId-quantity (
-   itemId - идентификатор товара, quantity - его количество.
-   Например: java CheckRunner 3-1 2-5 5-1 card-1234 должен сформировать и вывести в консоль чек содержащий в себе
-   наименование товара с id=3 в количестве 1шт, то же самое с id=2 в количестве 5 штук, id=5 - одна штука и т. д.
-   Card-1234 означает, что была предъявлена скидочная карта с номером 1234. Необходимо вывести в консоль сформированный
-   чек (вариант на рисунке), содержащий в себе список товаров и их количество с ценой, а также рассчитанную сумму с
-   учетом скидки по предъявленной карте (если она есть).
-* [x] Среди товаров предусмотреть акционные. Если их в чеке больше пяти, то сделать скидку 10% по этой позиции. Данную
-   информацию отразить в чеке.
-* [x] Набор товаров и скидочных карт может задаваться прямо в коде, массивом или коллекцией объектов. Их количество и
-   номенклатура имеет тестовый характер, поэтому наименование и количество свободные.
-* [x] Реализовать обработку исключений (например, товара с id или файла не существует и т. д.).
-* [x] Реализовать вывод чека в файл.
-* [x] Описать README.md файл (используемый стек, инструкцию по запуску, описание эндпоинтов, если есть).
-* [x] Использовать сборщик проекта gradle.
-* [x] Исходники разместить в любом из публичных репозиториев (bitbucket, github, gitlab).
-* [ ] Организовать чтение исходных данных (товары и скидочные карты, формат тот же) из файлов (в таком случае можно
-*     передавать имя файла в набор параметров команды java).
-* [ ] Покрыть функционал юнит-тестами (не менее 70%).
-* [ ] *Замена хранения исходных данных (п. 11) в файлах на PostgreSQL; сделать 2 таблицы (product и discount_card); DDL
-*     операции должны храниться в src/main/resources в файле с расширением *sql; настройки подключения к БД хранить в
-*     application.properties.
-* [ ] ** Реализовать RESTFUL - интерфейс (например, получать чек по GET http://localhost:8080/check?itemId=1&itemId=1).
-*     Реализация на выбор (Servlet, Spring). UI реализовывать не нужно.
-* [ ] *** Развернуть приложение и PostgreSQL в Docker Расширить функционал на свое усмотрение.
-* [ ] **** - Необязательно, но будет существенным плюсом. К этим пунктам лучше приступать после качественного решения
-    базовых задач с применением принципов SOLID, декларативных подходов, оптимальных алгоритмов.
-
-<!-- Code of Conduct -->
-
-### :scroll: Code of Conduct
-
-Please read the [Code of Conduct](https://github.com/Louis3797/awesome-readme-template/blob/master/CODE_OF_CONDUCT.md)
-
-<!-- FAQ -->
-
-## :grey_question: FAQ
-
-- Question 1
-
-      + Answer 1
-
-- Question 2
-
-      + Answer 2
+* [x] Among the goods, provide for promotional ones. If there are more than five of them in the bill, then make a 10% discount on this position. Show this information on your bill.
+* [ ] Implement exception handling (for example, product with id or file does not exist, etc.).
+* [x] Implement bill output to a file.
+* [x] Describe the project in the README.md file (the stack is used, the run instructions).
+* [x] Use the gradle project builder.
+* [x] Place the source code of the project in any of the public repositories (bitbucket, github, gitlab).
+* [ ] Organize reading of initial data (products and discount cards, the format is the same) from files (in this case, you can pass the file name to the java command parameter set).
+* [ ] Cover the code with unit tests (at least 70%).
+* [x] * Replace storage of source data in files with PostgreSQL; make 2 tables (product and discount_card); Operation DDL must be stored in src/main/resources in a file with .sql extension; store the database connection settings in application.properties.
+* [ ] ** Implement a RESTFUL interface (Servlet, Spring) (for example, receive a bill via GET http://localhost:8080/bill?itemId=1&itemId=1).
+* [ ] *** Deploy the application and PostgreSQL in Docker Expand the functionality at your discretion.
 
 <!-- License -->
 
 ## :warning: License
 
-Distributed under the no License. See LICENSE.txt for more information.
-
+Distributed under the no License. See LICENSE for more information.
 
 <!-- Contact -->
 
 ## :handshake: Contact
 
-Your Name - [@twitter_handle](https://twitter.com/twitter_handle) - email@email_client.com
+Petrovich Alexandr - [linkedin](www.linkedin.com/in/petroviсh-alexаndr) - a.piatrovich@gmail.com
 
-Project
-Link: [https://github.com/Louis3797/awesome-readme-template](https://github.com/Louis3797/awesome-readme-template)
-
+Project link: [Bill-generator](https://github.com/Petrovich-A/Bill-generator)
 
 <!-- Acknowledgments -->
 
 ## :gem: Acknowledgements
-
-Use this section to mention useful resources and libraries that you have used in your projects.
 
 - [Shields.io](https://shields.io/)
 - [Awesome README](https://github.com/matiassingers/awesome-readme)
