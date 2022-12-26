@@ -5,28 +5,23 @@ import java.util.List;
 import java.util.Objects;
 
 public class Bill implements Serializable {
-    private String headerLine;
-    private String delimiterLine;
-    private List<String> productsRows;
-    private String totalSumLine;
+    private List<ProductCalculationData> productCalculationData;
+    private double totalDiscount;
+    private double totalPrise;
 
     private Bill() {
     }
 
-    public String getHeaderLine() {
-        return headerLine;
+    public List<ProductCalculationData> getProductCalculationData() {
+        return productCalculationData;
     }
 
-    public String getDelimiterLine() {
-        return delimiterLine;
+    public double getTotalDiscount() {
+        return totalDiscount;
     }
 
-    public List<String> getProductsRows() {
-        return productsRows;
-    }
-
-    public String getTotalSumLine() {
-        return totalSumLine;
+    public double getTotalPrise() {
+        return totalPrise;
     }
 
     public static Builder newBuilder() {
@@ -38,23 +33,22 @@ public class Bill implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Bill bill = (Bill) o;
-        return Objects.equals(headerLine, bill.headerLine) && Objects.equals(delimiterLine, bill.delimiterLine) && Objects.equals(productsRows, bill.productsRows) && Objects.equals(totalSumLine, bill.totalSumLine);
+        return Double.compare(bill.totalDiscount, totalDiscount) == 0 && Double.compare(bill.totalPrise, totalPrise) == 0 && Objects.equals(productCalculationData, bill.productCalculationData);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(headerLine, delimiterLine, productsRows, totalSumLine);
+        return Objects.hash(productCalculationData, totalDiscount, totalPrise);
     }
 
     @Override
     public String toString() {
-        final StringBuffer stringBuffer = new StringBuffer();
-        stringBuffer.append(headerLine).append(delimiterLine);
-        for (String row : productsRows) {
-            stringBuffer.append(row);
-        }
-        stringBuffer.append(totalSumLine);
-        return stringBuffer.toString();
+        final StringBuffer sb = new StringBuffer("Bill{");
+        sb.append("productCalculationData=").append(productCalculationData);
+        sb.append(", totalDiscount=").append(totalDiscount);
+        sb.append(", totalPrise=").append(totalPrise);
+        sb.append('}');
+        return sb.toString();
     }
 
     /**
@@ -65,61 +59,26 @@ public class Bill implements Serializable {
         private Builder() {
         }
 
-        /**
-         * Sets the {@code header} and returns a reference to this Builder enabling method chaining.
-         *
-         * @param header the {@code header} to set
-         * @return a reference to this Builder
-         */
-        public Builder withHeader(String header) {
-            Bill.this.headerLine = header;
+        public Builder withProductCalculationData(List<ProductCalculationData> productCalculationData) {
+            Bill.this.productCalculationData = productCalculationData;
             return this;
         }
 
-        /**
-         * Sets the {@code delimiterLine} and returns a reference to this Builder enabling method chaining.
-         *
-         * @param delimiterLine the {@code delimiterLine} to set
-         * @return a reference to this Builder
-         */
-        public Builder withDelimiterLine(String delimiterLine) {
-            Bill.this.delimiterLine = delimiterLine;
+        public Builder withTotalDiscount(double totalDiscount) {
+            Bill.this.totalDiscount = totalDiscount;
             return this;
         }
 
-        /**
-         * Sets the {@code productRows} and returns a reference to this Builder enabling method chaining.
-         *
-         * @param productRows the {@code productRows} to set
-         * @return a reference to this Builder
-         */
-        public Builder withProductRows(List<String> productRows) {
-            Bill.this.productsRows = productRows;
+        public Builder withTotalPrise(double totalPrise) {
+            Bill.this.totalPrise = totalPrise;
             return this;
         }
 
-        /**
-         * Sets the {@code totalPricesSum} and returns a reference to this Builder enabling method chaining.
-         *
-         * @param totalSum the {@code totalPricesSum} to set
-         * @return a reference to this Builder
-         */
-        public Builder withTotalSum(String totalSum) {
-            Bill.this.totalSumLine = totalSum;
-            return this;
-        }
-
-        /**
-         * Returns a {@code Bill} built from the parameters previously set.
-         *
-         * @return a {@code Bill} built with parameters of this {@code Bill.Builder}
-         */
         public Bill build() {
             Bill bill = new Bill();
-            bill.headerLine = Bill.this.headerLine;
-            bill.delimiterLine = Bill.this.delimiterLine;
-            bill.productsRows = Bill.this.productsRows;
-            bill.totalSumLine = Bill.this.totalSumLine;
+            bill.productCalculationData = Bill.this.productCalculationData;
+            bill.totalDiscount = Bill.this.totalDiscount;
+            bill.totalPrise = Bill.this.totalPrise;
             return bill;
         }
     }
