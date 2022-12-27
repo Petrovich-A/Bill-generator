@@ -1,49 +1,28 @@
 package by.petrovich.service.impl;
 
-import by.petrovich.model.Product;
+import by.petrovich.model.ProductCalculationData;
 import by.petrovich.service.BillCalculator;
+import by.petrovich.util.DoubleRounder;
 
-import java.text.DecimalFormat;
 import java.util.List;
 
 public class BillCalculatorImpl implements BillCalculator {
     @Override
-    public double calculatePrise(double prise, int quantity) {
-        return prise * quantity;
-    }
-
-    public double calculatePriseWithDiscount(double prise, double discountPercent) {
-        DecimalFormat decimalFormat = new DecimalFormat("0.00");
-        double priseWithDiscount = prise - calculateDiscountValue(prise, discountPercent);
-        String format =  decimalFormat.format(priseWithDiscount);
-        return Double.parseDouble(format.replace(",", "."));
-    }
-
-    @Override
-    public double calculateDiscountValue(double prise, double discountPercent) {
-        return prise * discountPercent / 100;
-    }
-
-    @Override
-    public double calculateTotalSum(List<Product> products) {
-        double prisesSum = 0.0;
-        for (Product product : products) {
-            prisesSum += product.getTotalPrise();
+    public double calculateTotalCost(List<ProductCalculationData> productsCalculationData) {
+        double totalCost = 0;
+        for (ProductCalculationData productCalculationData : productsCalculationData) {
+            totalCost += productCalculationData.getCost();
         }
-        return prisesSum;
+        return DoubleRounder.doubleRound(totalCost);
     }
 
     @Override
-    public double calculateTotalSumWithDiscount(List<Product> products, double discountPercent) {
-        return calculateTotalSum(products) - calculateTotalDiscountSum(products, discountPercent);
-    }
-
-    @Override
-    public double calculateTotalDiscountSum(List<Product> products, double discountPercent) {
-        double discountSum = 0.0;
-        for (Product product : products) {
-            discountSum += calculateDiscountValue(product.getTotalPrise(), discountPercent);
+    public double calculateTotalDiscount(List<ProductCalculationData> productsCalculationData) {
+        double totalDiscount = 0;
+        for (ProductCalculationData productCalculationData : productsCalculationData) {
+            totalDiscount += productCalculationData.getDiscountAmount();
         }
-        return discountSum;
+        return DoubleRounder.doubleRound(totalDiscount);
     }
+
 }

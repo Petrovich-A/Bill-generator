@@ -15,6 +15,13 @@ public class Product {
         this.isOnSale = isOnSale;
     }
 
+    public Product() {
+
+    }
+
+    public Product(double v) {
+    }
+
     public int getId() {
         return id;
     }

@@ -7,7 +7,7 @@ import java.util.Objects;
 public class Bill implements Serializable {
     private List<ProductCalculationData> productCalculationData;
     private double totalDiscount;
-    private double totalPrise;
+    private double totalCost;
 
     private Bill() {
     }
@@ -20,8 +20,8 @@ public class Bill implements Serializable {
         return totalDiscount;
     }
 
-    public double getTotalPrise() {
-        return totalPrise;
+    public double getTotalCost() {
+        return totalCost;
     }
 
     public static Builder newBuilder() {
@@ -33,12 +33,12 @@ public class Bill implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Bill bill = (Bill) o;
-        return Double.compare(bill.totalDiscount, totalDiscount) == 0 && Double.compare(bill.totalPrise, totalPrise) == 0 && Objects.equals(productCalculationData, bill.productCalculationData);
+        return Double.compare(bill.totalDiscount, totalDiscount) == 0 && Double.compare(bill.totalCost, totalCost) == 0 && Objects.equals(productCalculationData, bill.productCalculationData);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(productCalculationData, totalDiscount, totalPrise);
+        return Objects.hash(productCalculationData, totalDiscount, totalCost);
     }
 
     @Override
@@ -46,7 +46,7 @@ public class Bill implements Serializable {
         final StringBuffer sb = new StringBuffer("Bill{");
         sb.append("productCalculationData=").append(productCalculationData);
         sb.append(", totalDiscount=").append(totalDiscount);
-        sb.append(", totalPrise=").append(totalPrise);
+        sb.append(", totalPrise=").append(totalCost);
         sb.append('}');
         return sb.toString();
     }
@@ -70,7 +70,7 @@ public class Bill implements Serializable {
         }
 
         public Builder withTotalPrise(double totalPrise) {
-            Bill.this.totalPrise = totalPrise;
+            Bill.this.totalCost = totalPrise;
             return this;
         }
 
@@ -78,7 +78,7 @@ public class Bill implements Serializable {
             Bill bill = new Bill();
             bill.productCalculationData = Bill.this.productCalculationData;
             bill.totalDiscount = Bill.this.totalDiscount;
-            bill.totalPrise = Bill.this.totalPrise;
+            bill.totalCost = Bill.this.totalCost;
             return bill;
         }
     }

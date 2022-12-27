@@ -47,11 +47,11 @@ public class ProductDaoImpl implements ProductDao {
         Product product = new Product();
         product.setId(resultSet.getInt(ID_PRODUCT));
         product.setName(resultSet.getString(NAME));
-        product.setQuantity(resultSet.getInt(QUANTITY));
+
         product.setPrise(resultSet.getDouble(PRISE));
-        product.setTotalPrise(resultSet.getDouble(TOTAL_PRISE));
+
         product.setOnSale(resultSet.getBoolean(IS_ON_SALE));
-        product.setDiscountAmount(resultSet.getDouble(DISCOUNT_AMOUNT));
+
         return product;
     }
 }

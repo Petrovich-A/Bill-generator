@@ -1,33 +1,28 @@
 package by.petrovich.model;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class InputData {
-    private int productId;
-    private int quantity;
+    private Map<Integer, Integer> idToQuantity = new HashMap<>();
     private int cardNumber;
 
-    public InputData(int productId, int quantity, int cardNumber) {
-        this.productId = productId;
-        this.quantity = quantity;
+    public InputData(Map<Integer, Integer> idToQuantity, int cardNumber) {
+        this.idToQuantity = idToQuantity;
         this.cardNumber = cardNumber;
     }
 
-    public int getProductId() {
-        return productId;
+    public InputData() {
+
     }
 
-    public InputData setProductId(int productId) {
-        this.productId = productId;
-        return this;
+    public Map<Integer, Integer> getIdToQuantity() {
+        return idToQuantity;
     }
 
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public InputData setQuantity(int quantity) {
-        this.quantity = quantity;
+    public InputData setIdToQuantity(Map<Integer, Integer> idToQuantity) {
+        this.idToQuantity = idToQuantity;
         return this;
     }
 
@@ -45,21 +40,18 @@ public class InputData {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         InputData inputData = (InputData) o;
-        return productId == inputData.productId && quantity == inputData.quantity && cardNumber == inputData.cardNumber;
+        return cardNumber == inputData.cardNumber && Objects.equals(idToQuantity, inputData.idToQuantity);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(productId, quantity, cardNumber);
+        return Objects.hash(idToQuantity, cardNumber);
     }
 
     @Override
     public String toString() {
-        final StringBuffer sb = new StringBuffer("InputData{");
-        sb.append("productId=").append(productId);
-        sb.append(", quantity=").append(quantity);
-        sb.append(", cardNumber=").append(cardNumber);
-        sb.append('}');
-        return sb.toString();
+        return "InputData{" + "idToQuantity=" + idToQuantity +
+                ", cardNumber=" + cardNumber +
+                '}';
     }
 }
