@@ -1,11 +1,11 @@
 package by.petrovich;
 
-import by.petrovich.model.DiscountCard;
-import by.petrovich.model.InputData;
-import by.petrovich.model.Product;
-import by.petrovich.model.ProductCalculationData;
+import by.petrovich.model.*;
+import by.petrovich.service.impl.BillService;
 import by.petrovich.service.impl.ProductServiceImpl;
+import by.petrovich.util.ConsoleWriter;
 import by.petrovich.util.FileReader;
+import by.petrovich.util.FileWriter;
 import by.petrovich.util.Parser;
 
 import java.util.List;
@@ -35,6 +35,20 @@ public class Main {
         productsCalculationData = productService.determineProductCalculationData(inputData);
         System.out.println("productsCalculationData: " + productsCalculationData);
 
+        BillService billService = new BillService();
+        Bill bill = billService.receiveBill(productsCalculationData);
+        System.out.println("bill: " + bill);
 
+        BillFormationData billFormationData = billService.receiveBillFormationData(productsCalculationData);
+        System.out.println();
+        System.out.println(billFormationData);
+
+        ConsoleWriter consoleWriter = new ConsoleWriter();
+        consoleWriter.writeBill(billFormationData);
+
+        System.out.println();
+
+        FileWriter fileWriter = new FileWriter();
+        fileWriter.writeBill(billFormationData);
     }
 }
