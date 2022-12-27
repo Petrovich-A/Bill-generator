@@ -16,6 +16,7 @@ public class FileWriter implements BillPrinter {
 
     /**
      * @param billFormationData
+     * @return
      */
     @Override
     public void writeBill(BillFormationData billFormationData) {

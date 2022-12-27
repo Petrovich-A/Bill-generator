@@ -57,12 +57,12 @@ public class BillFormationData {
 
     @Override
     public String toString() {
-        final StringBuffer sb = new StringBuffer("BillFormationData{");
-        sb.append("header='").append(header).append('\'');
-        sb.append(", delimiterLine='").append(delimiterLine).append('\'');
-        sb.append(", productRows=").append(productRows);
-        sb.append(", totalFooter='").append(totalFooter).append('\'');
-        sb.append('}');
-        return sb.toString();
+        StringBuffer stringBuffer = new StringBuffer();
+        stringBuffer.append(this.getHeader());
+        stringBuffer.append(this.getDelimiterLine());
+        this.getProductRows().forEach(row -> stringBuffer.append(row));
+        stringBuffer.append(this.getDelimiterLine());
+        stringBuffer.append(this.getTotalFooter());
+        return stringBuffer.toString();
     }
 }

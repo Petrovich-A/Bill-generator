@@ -8,7 +8,6 @@ import by.petrovich.model.DiscountCard;
 import by.petrovich.model.InputData;
 import by.petrovich.model.Product;
 import by.petrovich.model.ProductCalculationData;
-import by.petrovich.service.DiscountCardService;
 import by.petrovich.service.ProductService;
 
 import java.util.ArrayList;
@@ -21,7 +20,6 @@ public class ProductServiceImpl implements ProductService {
     private final ProductDao productDao = new ProductDaoImpl();
     private final DiscountCardDao discountCardDao = new DiscountCardDaoImpl();
     private final ProductCalculatorImpl productCalculatorImpl = new ProductCalculatorImpl();
-    private final DiscountCardService discountCardService = new DiscountCardServiceImpl();
 
     @Override
     public List<Product> receiveProducts(InputData inputData) {
@@ -41,8 +39,8 @@ public class ProductServiceImpl implements ProductService {
         ProductCalculationData productCalculationData = new ProductCalculationData();
         for (Product product : products) {
             productCalculationData.setProduct(product);
-            productCalculationData.setQuantity(inputData.getIdToQuantity().get(product.getId()));
-            if (product.isOnSale() && inputData.getIdToQuantity().get(product.getId()) > QUANTITY_FOR_GETTING_DISCOUNT) {
+            productCalculationData.setQuantity(idToQuantity.get(product.getId()));
+            if (product.isOnSale() && idToQuantity.get(product.getId()) > QUANTITY_FOR_GETTING_DISCOUNT) {
                 productCalculationData.setCost(productCalculatorImpl.calculateCostWithDiscount(product.getPrise(), idToQuantity.get(product.getId()),
                         DISCOUNT_PERCENT_FOR_PRODUCTS_ON_SALE));
                 productCalculationData.setDiscountAmount(productCalculatorImpl.calculateDiscountAmount(product.getPrise(), DISCOUNT_PERCENT_FOR_PRODUCTS_ON_SALE));

@@ -41,7 +41,7 @@ public class Main {
 
         BillFormationData billFormationData = billService.receiveBillFormationData(productsCalculationData);
         System.out.println();
-        System.out.println(billFormationData);
+//        System.out.println("billFormationData: " + billFormationData);
 
         ConsoleWriter consoleWriter = new ConsoleWriter();
         consoleWriter.writeBill(billFormationData);
