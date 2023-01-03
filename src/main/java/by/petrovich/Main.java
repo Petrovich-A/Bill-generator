@@ -25,7 +25,7 @@ public class Main {
 
         ProductServiceImpl productService = new ProductServiceImpl();
         List<Product> products = productService.receiveProducts(inputData);
-        System.out.println(products);
+        System.out.println("products: " + products);
 
         DiscountCard discountCard;
         discountCard = productService.receiveDiscountCard(inputData.getCardNumber());

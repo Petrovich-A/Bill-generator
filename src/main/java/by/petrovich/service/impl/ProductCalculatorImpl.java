@@ -9,13 +9,8 @@ public class ProductCalculatorImpl implements ProductCalculator {
     }
 
     @Override
-    public double calculateDiscountAmount(double prise, double discountPercent) {
-        return prise * discountPercent / 100;
-    }
-
-    @Override
-    public double calculateCostWithDiscount(double prise, int quantity, double discountPercent) {
-        return calculateDiscountAmount(calculateCost(prise, quantity), discountPercent);
+    public double calculateDiscountAmount(double cost, double discountPercent) {
+        return cost * discountPercent / 100;
     }
 
 }

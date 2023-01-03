@@ -5,6 +5,4 @@ public interface ProductCalculator {
 
     double calculateDiscountAmount(double prise, double discountPercent);
 
-    double calculateCostWithDiscount(double prise, int quantity, double discountPercent);
-
 }

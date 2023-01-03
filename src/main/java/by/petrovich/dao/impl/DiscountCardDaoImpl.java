@@ -11,15 +11,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static by.petrovich.dao.ColumnNames.ID_DISCOUNT_CARD;
-import static by.petrovich.dao.ColumnNames.NUMBER;
+import static by.petrovich.dao.ColumnNames.*;
 
 public class DiscountCardDaoImpl implements DiscountCardDao {
     private final DataBaseConnector dataBaseConnector = new DataBaseConnector();
 
-    private static final String QUERY_READ_ALL_DISCOUNT_CARDS = "SELECT id_discount_card, number FROM billgenerator.discount_cards";
-    private static final String QUERY_READ_DISCOUNT_CARD_BY_ID = "SELECT id_discount_card, number FROM billgenerator.discount_cards where id_discount_card = ?";
-    private static final String QUERY_READ_DISCOUNT_CARD_BY_NUMBER = "SELECT id_discount_card, number FROM billgenerator.discount_cards where number = ?";
+    private static final String QUERY_READ_ALL_DISCOUNT_CARDS = "SELECT id_discount_card, number, discount_percent FROM billgenerator.discount_cards";
+    private static final String QUERY_READ_DISCOUNT_CARD_BY_ID = "SELECT id_discount_card, number, discount_percent FROM billgenerator.discount_cards where id_discount_card = ?";
+    private static final String QUERY_READ_DISCOUNT_CARD_BY_NUMBER = "SELECT id_discount_card, number, discount_percent FROM billgenerator.discount_cards where number = ?";
 
     /**
      * @return
@@ -88,7 +87,8 @@ public class DiscountCardDaoImpl implements DiscountCardDao {
     private DiscountCard populateDiscountCard(ResultSet resultSet) throws SQLException {
         DiscountCard discountCard = new DiscountCard();
         discountCard.setId(resultSet.getInt(ID_DISCOUNT_CARD));
-        discountCard.setDiscountPercent(resultSet.getInt(NUMBER));
+        discountCard.setNumber(resultSet.getInt(NUMBER));
+        discountCard.setDiscountPercent(resultSet.getDouble(DISCOUNT_PERCENT));
         return discountCard;
     }
 

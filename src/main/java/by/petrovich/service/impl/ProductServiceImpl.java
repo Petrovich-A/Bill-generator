@@ -36,21 +36,16 @@ public class ProductServiceImpl implements ProductService {
         Map<Integer, Integer> idToQuantity = inputData.getIdToQuantity();
         List<Product> products = receiveProducts(inputData);
         List<ProductCalculationData> productsCalculationData = new ArrayList<>();
-        ProductCalculationData productCalculationData = new ProductCalculationData();
         for (Product product : products) {
+            ProductCalculationData productCalculationData = new ProductCalculationData();
             productCalculationData.setProduct(product);
             productCalculationData.setQuantity(idToQuantity.get(product.getId()));
+            productCalculationData.setCost(productCalculatorImpl.calculateCost(product.getPrise(), idToQuantity.get(product.getId())));
             if (product.isOnSale() && idToQuantity.get(product.getId()) > QUANTITY_FOR_GETTING_DISCOUNT) {
-                productCalculationData.setCost(productCalculatorImpl.calculateCostWithDiscount(product.getPrise(), idToQuantity.get(product.getId()),
-                        DISCOUNT_PERCENT_FOR_PRODUCTS_ON_SALE));
-                productCalculationData.setDiscountAmount(productCalculatorImpl.calculateDiscountAmount(product.getPrise(), DISCOUNT_PERCENT_FOR_PRODUCTS_ON_SALE));
+                productCalculationData.setDiscountAmount(productCalculatorImpl.calculateDiscountAmount(productCalculationData.getCost(), DISCOUNT_PERCENT_FOR_PRODUCTS_ON_SALE));
             } else if (inputData.getCardNumber() != 0) {
                 DiscountCard discountCard = receiveDiscountCard(inputData.getCardNumber());
-                productCalculationData.setCost(productCalculatorImpl.calculateCostWithDiscount(product.getPrise(), idToQuantity.get(product.getId()),
-                        discountCard.getDiscountPercent()));
-                productCalculationData.setDiscountAmount(productCalculatorImpl.calculateDiscountAmount(product.getPrise(), discountCard.getDiscountPercent()));
-            } else {
-                productCalculationData.setCost(productCalculatorImpl.calculateCost(product.getPrise(), idToQuantity.get(product.getId())));
+                productCalculationData.setDiscountAmount(productCalculatorImpl.calculateDiscountAmount(productCalculationData.getCost(), discountCard.getDiscountPercent()));
             }
             productsCalculationData.add(productCalculationData);
         }

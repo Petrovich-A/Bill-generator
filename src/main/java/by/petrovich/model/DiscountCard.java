@@ -4,33 +4,40 @@ import java.util.Objects;
 
 public class DiscountCard {
     private int id;
-    private int discountPercent;
-
-    public DiscountCard(int id, int discountPercent) {
-        this.id = id;
-        this.discountPercent = discountPercent;
-    }
+    private int number;
+    private double discountPercent;
 
     public DiscountCard() {
+    }
 
+    public DiscountCard(int id, int number, double discountPercent) {
+        this.id = id;
+        this.number = number;
+        this.discountPercent = discountPercent;
     }
 
     public int getId() {
         return id;
     }
 
-    public DiscountCard setId(int id) {
+    public void setId(int id) {
         this.id = id;
-        return this;
     }
 
-    public int getDiscountPercent() {
+    public int getNumber() {
+        return number;
+    }
+
+    public void setNumber(int number) {
+        this.number = number;
+    }
+
+    public double getDiscountPercent() {
         return discountPercent;
     }
 
-    public DiscountCard setDiscountPercent(int discountPercent) {
+    public void setDiscountPercent(double discountPercent) {
         this.discountPercent = discountPercent;
-        return this;
     }
 
     @Override
@@ -38,18 +45,19 @@ public class DiscountCard {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         DiscountCard that = (DiscountCard) o;
-        return id == that.id && discountPercent == that.discountPercent;
+        return id == that.id && number == that.number && Double.compare(that.discountPercent, discountPercent) == 0;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, discountPercent);
+        return Objects.hash(id, number, discountPercent);
     }
 
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("DiscountCard{");
         sb.append("id=").append(id);
+        sb.append(", number=").append(number);
         sb.append(", discountPercent=").append(discountPercent);
         sb.append('}');
         return sb.toString();
