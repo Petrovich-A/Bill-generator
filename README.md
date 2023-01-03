@@ -1,20 +1,146 @@
-# Bill-generator
+<div align="center">
 
-Разработать консольное приложение, реализующее функционал формирования чека в магазине.
-1. В данном задании важно показать понимание ООП, умение строить модели (выделять классы, интерфейсы, их связи), разделять функционал между ними, а также знать синтаксис самого языка. Обязательно применение паттернов проектирования (Factory, Builder, Decorator). Обратить внимание на устойчивость к изменениям в логике и избегать копипаста.
-2. Использовать Java 17, gradle 7.5.
-3. Приложение запускается java RunnerClassName <набор_параметров>, где набор параметров в формате itemId-quantity (itemId - идентификатор товара, quantity - его количество.
-      Например: java CheckRunner 3-1 2-5 5-1 card-1234 должен сформировать и вывести в консоль чек содержащий в себе наименование товара с id=3 в количестве 1шт, то же самое с id=2 в количестве 5 штук, id=5 - одна штука и т. д. Card-1234 означает, что была предъявлена скидочная карта с номером 1234. Необходимо вывести в консоль сформированный чек (вариант на рисунке), содержащий в себе список товаров и их количество с ценой, а также рассчитанную сумму с учетом скидки по предъявленной карте (если она есть).
-4. Среди товаров предусмотреть акционные. Если их в чеке больше пяти, то сделать скидку 10% по этой позиции. Данную информацию отразить в чеке.
-5. Набор товаров и скидочных карт может задаваться прямо в коде, массивом или коллекцией объектов. Их количество и номенклатура имеет тестовый характер, поэтому наименование и количество свободные.
-6. Реализовать обработку исключений (например, товара с id или файла не существует и т. д.).
-7. Реализовать вывод чека в файл.
-8. Описать README.md файл (используемый стек, инструкцию по запуску, описание эндпоинтов, если есть).
-9. Использовать сборщик проекта gradle.
-10. Исходники разместить в любом из публичных репозиториев (bitbucket, github, gitlab).
-11. Организовать чтение исходных данных (товары и скидочные карты, формат тот же) из файлов (в таком случае можно передавать имя файла в набор параметров команды java).
-12. Покрыть функционал юнит-тестами (не менее 70%).
-13. * Замена хранения исходных данных (п. 11) в файлах на PostgreSQL; сделать 2 таблицы (product и discount_card); DDL операции должны храниться в src/main/resources в файле с расширением *sql; настройки подключения к БД хранить в application.properties.
-14. ** Реализовать RESTFUL - интерфейс (например, получать чек по GET http://localhost:8080/check?itemId=1&itemId=1). Реализация на выбор (Servlet, Spring). UI реализовывать не нужно.
-15. *** Развернуть приложение и PostgreSQL в Docker Расширить функционал на свое усмотрение.
-16. **** - Необязательно, но будет существенным плюсом. К этим пунктам лучше приступать после качественного решения базовых задач с применением принципов SOLID, декларативных подходов, оптимальных алгоритмов.
+<img src="https://github.com/Petrovich-A/Bill-generator/blob/bill_generate/src/main/resources/img/img.png"
+alt="logo" width="600" height="auto" />
+  <h1>Bill generator app</h1>
+
+  <p>
+    An awesome test task special for Clever Technology! 
+  </p>
+
+
+<!-- Badges -->
+<p>
+<a>
+<img alt="Coveralls" src="https://img.shields.io/coverallsCoverage/github/Petrovich-A/Bill-generator">
+</a>
+<img alt="AppVeyor tests (branch)" src="https://img.shields.io/appveyor/tests/Petrovich-A/Bill-generator/bill_generate">
+<a>
+<img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/Petrovich-A/Bill-generator">
+</a>
+<a>
+<img alt="Packagist Stars" src="https://img.shields.io/packagist/stars/Petrovich-A/Bill-generator">
+</a>
+<a>
+<img alt="GitHub" src="https://img.shields.io/github/license/Petrovich-A/Bill-generator">
+</a>
+<a>
+<img alt="GitHub commit activity" src="https://img.shields.io/github/commit-activity/m/Petrovich-A/Bill-generator">
+</a>
+</p>
+</div>
+<br />
+
+<!-- Table of Contents -->
+
+# :notebook_with_decorative_cover: Table of Contents
+
+- [About the Project](#star2-about-the-project)
+    * [Tech Stack](#space_invader-tech-stack)
+- [Getting Started](#toolbox-getting-started)
+    * [Running Tests](#test_tube-running-tests)
+    * [Run Locally](#running-run-locally)
+- [Roadmap](#compass-roadmap)
+- [License](#warning-license)
+- [Contact](#handshake-contact)
+
+<!-- About the Project -->
+
+## :star2: About the Project
+
+The developed application allows to generate an imitation of a store receipt (bill) with goods. The input data takes a set of parameters in the format <itemId-quantity> (itemId is the identifier of the product, quantity is its quantity. For example: 3-1, 2-5, 5-1. Card-1234 is also passed. Card-1234 means that a discount card with number 1234 has been found. 
+As a result of the application's operation, the generated receipt is print in console or to a file.
+
+<!-- TechStack -->
+
+### :space_invader: Tech Stack
+
+<details>
+  <summary>Client</summary>
+  <ul>
+    <li><a href="https://www.jetbrains.com/idea/">IntelliJ IDEA 2022.1.2</a></li>
+  </ul>
+</details>
+
+<details>
+<summary>Database</summary>
+  <ul>
+    <li><a href="MySQL">MySQL</a></li>
+  </ul>
+</details>
+
+<details>
+<summary>DevOps</summary>
+  <ul>
+    <li><a href="https://www.docker.com/">Docker</a></li>
+  </ul>
+</details>
+
+<!-- Getting Started -->
+
+## :toolbox: Getting Started
+
+<!-- Running Tests -->
+
+### :test_tube: Running Tests
+
+To run tests, run the following command
+
+```bash
+  yarn test test
+```
+
+<!-- Run Locally -->
+
+### :running: Run Locally
+
+Clone the project
+
+```bash
+  git clone https://github.com/Petrovich-A/Bill-generator
+```
+
+Install dependencies
+
+```bash
+  gradle --refresh-dependencies
+```
+
+<!-- Roadmap -->
+
+## :compass: Roadmap
+
+* [x] Among the goods, provide for promotional ones. If there are more than five of them in the bill, then make a 10% discount on this position. Show this information on your bill.
+* [ ] Implement exception handling (for example, product with id or file does not exist, etc.).
+* [x] Implement bill output to a file.
+* [x] Describe the project in the README.md file (the stack is used, the run instructions).
+* [x] Use the gradle project builder.
+* [x] Place the source code of the project in any of the public repositories (bitbucket, github, gitlab).
+* [ ] Organize reading of initial data (products and discount cards, the format is the same) from files (in this case, you can pass the file name to the java command parameter set).
+* [ ] Cover the code with unit tests (at least 70%).
+* [x] * Replace storage of source data in files with PostgreSQL; make 2 tables (product and discount_card); Operation DDL must be stored in src/main/resources in a file with .sql extension; store the database connection settings in application.properties.
+* [ ] ** Implement a RESTFUL interface (Servlet, Spring) (for example, receive a bill via GET http://localhost:8080/bill?itemId=1&itemId=1).
+* [ ] *** Deploy the application and PostgreSQL in Docker Expand the functionality at your discretion.
+
+<!-- License -->
+
+## :warning: License
+
+Distributed under the no License. See LICENSE for more information.
+
+<!-- Contact -->
+
+## :handshake: Contact
+
+Petrovich Alexandr - [linkedin](www.linkedin.com/in/petroviсh-alexаndr) - a.piatrovich@gmail.com
+
+Project link: [Bill-generator](https://github.com/Petrovich-A/Bill-generator)
+
+<!-- Acknowledgments -->
+
+## :gem: Acknowledgements
+
+- [Shields.io](https://shields.io/)
+- [Awesome README](https://github.com/matiassingers/awesome-readme)
+- [Emoji Cheat Sheet](https://github.com/ikatyang/emoji-cheat-sheet/blob/master/README.md#travel--places)
+- [Readme Template](https://github.com/othneildrew/Best-README-Template)
