@@ -41,12 +41,12 @@ public class ProductDaoImpl implements ProductDao {
     }
 
     private Product productMapper(ResultSet resultSet, int id) throws SQLException {
-        Product product = new Product();
+        Product product = null;
         if (resultSet.next()) {
-                product = populateProduct(resultSet);
+            product = populateProduct(resultSet);
         } else {
             LOGGER.log(Level.INFO, "Product with id: {} doesn't exist", id);
-            System.out.printf("Product with id: %d doesn't exist%n", id);
+            System.out.printf("Product with id: %d doesn't exist", id);
         }
         return product;
     }
