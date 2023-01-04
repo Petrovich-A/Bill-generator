@@ -65,4 +65,5 @@ public class BillFormationData {
         stringBuffer.append(this.getTotalFooter());
         return stringBuffer.toString();
     }
+
 }

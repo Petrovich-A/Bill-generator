@@ -22,37 +22,37 @@ public class ProductServiceImpl implements ProductService {
     private final ProductCalculatorImpl productCalculatorImpl = new ProductCalculatorImpl();
 
     @Override
-    public List<Product> receiveProducts(InputData inputData) {
-        List<Product> products = new ArrayList<>();
-        Map<Integer, Integer> idToQuantity = inputData.getIdToQuantity();
-        for (Integer key : idToQuantity.keySet()) {
-            products.add(productDao.readProductById(key));
-        }
-        return products;
-    }
-
-    @Override
     public List<ProductCalculationData> determineProductCalculationData(InputData inputData) {
         Map<Integer, Integer> idToQuantity = inputData.getIdToQuantity();
-        List<Product> products = receiveProducts(inputData);
         List<ProductCalculationData> productsCalculationData = new ArrayList<>();
-        for (Product product : products) {
+        for (Integer key : idToQuantity.keySet()) {
+            Product product = productDao.readProductById(key);
             ProductCalculationData productCalculationData = new ProductCalculationData();
             productCalculationData.setProduct(product);
             productCalculationData.setQuantity(idToQuantity.get(product.getId()));
-            productCalculationData.setCost(productCalculatorImpl.calculateCost(product.getPrise(), idToQuantity.get(product.getId())));
-            if (product.isOnSale() && idToQuantity.get(product.getId()) > QUANTITY_FOR_GETTING_DISCOUNT) {
-                productCalculationData.setDiscountAmount(productCalculatorImpl.calculateDiscountAmount(productCalculationData.getCost(), DISCOUNT_PERCENT_FOR_PRODUCTS_ON_SALE));
-            } else if (inputData.getCardNumber() != 0) {
-                DiscountCard discountCard = receiveDiscountCard(inputData.getCardNumber());
-                productCalculationData.setDiscountAmount(productCalculatorImpl.calculateDiscountAmount(productCalculationData.getCost(), discountCard.getDiscountPercent()));
-            }
+            productCalculationData.setCost(receiveCost(product.getPrise(), idToQuantity.get(product.getId())));
+            productCalculationData.setDiscountAmount(receiveDiscount(inputData, idToQuantity, product, productCalculationData));
             productsCalculationData.add(productCalculationData);
         }
         return productsCalculationData;
     }
 
-    public DiscountCard receiveDiscountCard(int cardNumber) {
+    private double receiveDiscount(InputData inputData, Map<Integer, Integer> idToQuantity, Product product, ProductCalculationData productCalculationData) {
+        double discountAmount = 0.0;
+        if (product.isOnSale() && idToQuantity.get(product.getId()) > QUANTITY_FOR_GETTING_DISCOUNT) {
+            discountAmount = productCalculatorImpl.calculateDiscountAmount(productCalculationData.getCost(), DISCOUNT_PERCENT_FOR_PRODUCTS_ON_SALE);
+        } else if (inputData.getCardNumber() != 0) {
+            DiscountCard discountCard = receiveDiscountCard(inputData.getCardNumber());
+            discountAmount = productCalculatorImpl.calculateDiscountAmount(productCalculationData.getCost(), discountCard.getDiscountPercent());
+        }
+        return discountAmount;
+    }
+
+    private double receiveCost(double quantity, int productId) {
+        return productCalculatorImpl.calculateCost(quantity, productId);
+    }
+
+    private DiscountCard receiveDiscountCard(int cardNumber) {
         return discountCardDao.readDiscountCardByNumber(cardNumber);
     }
 

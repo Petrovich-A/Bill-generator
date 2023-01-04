@@ -65,23 +65,22 @@ public class BillFormatter {
     }
 
     private String totalCostFormation(double totalCost) {
-        return String.format("%3s %35f %s ",
+        return String.format("%3s %35.2f %s ",
                 TOTAL_COST, totalCost, END_LINE_SIGHT);
     }
 
-    private String totalDiscountFormation(double totalCost) {
-        return String.format("%3s %35f %s",
-                TOTAL_DISCOUNT, totalCost, END_LINE_SIGHT);
+    private String totalDiscountFormation(double totalDiscount) {
+        return String.format("%3s %35.2f %s",
+                TOTAL_DISCOUNT, totalDiscount, END_LINE_SIGHT);
     }
 
     private String discountRowFormation(ProductCalculationData productCalculationData) {
-        return String.format("%38s %f %s",
+        return String.format("%40s %.2f %s",
                 DASH_SIGHT, productCalculationData.getDiscountAmount(), END_LINE_SIGHT);
     }
 
-
     private String productRowFormation(ProductCalculationData productCalculationData) {
-        return String.format("%3s %20s %10f %10f %s",
+        return String.format("%3d %20s %10.2f %10.2f %s",
                 productCalculationData.getQuantity(),
                 productCalculationData.getProduct().getName(),
                 productCalculationData.getProduct().getPrise(),
