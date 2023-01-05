@@ -9,18 +9,19 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
+import static by.petrovich.util.BillFormatter.DASH_SIGHT;
+import static by.petrovich.util.BillFormatter.DELIMITER_LINE;
+import static by.petrovich.util.BillFormatter.DESCRIPTION_COLUMN;
+import static by.petrovich.util.BillFormatter.END_LINE_SIGHT;
+import static by.petrovich.util.BillFormatter.PRICE_COLUMN;
+import static by.petrovich.util.BillFormatter.QUANTITY_COLUMN;
+import static by.petrovich.util.BillFormatter.STORE_ADDRESS;
+import static by.petrovich.util.BillFormatter.STORE_NAME;
+import static by.petrovich.util.BillFormatter.TOTAL_COLUMN;
+import static by.petrovich.util.BillFormatter.TOTAL_COST;
+import static by.petrovich.util.BillFormatter.TOTAL_DISCOUNT;
+
 class BillFormatterTest {
-    private final String STORE_NAME = "'Seven Heaven'";
-    private final String STORE_ADDRESS = "Address: 7th Heaven, 77";
-    private final String QUANTITY_COLUMN = "QTY";
-    private final String DESCRIPTION_COLUMN = "DESCRIPTION";
-    private final String PRICE_COLUMN = "PRICE";
-    private final String TOTAL_COLUMN = "TOTAL";
-    private final String TOTAL_COST = "TOTAL COST:";
-    private final String TOTAL_DISCOUNT = "DISCOUNT:";
-    private final String END_LINE_SIGHT = "\n";
-    private final String DASH_SIGHT = "-";
-    private final String DELIMITER_LINE = "-----------------------------------------------------------------------------";
     private final BillFormatter billFormatter = new BillFormatter();
 
     @Test

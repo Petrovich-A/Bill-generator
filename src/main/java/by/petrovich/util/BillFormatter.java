@@ -8,18 +8,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BillFormatter {
-    private final String STORE_NAME = "'Seven Heaven'";
-    private final String STORE_ADDRESS = "Address: 7th Heaven, 77";
-    private final String QUANTITY_COLUMN = "QTY";
-    private final String DESCRIPTION_COLUMN = "DESCRIPTION";
-    private final String PRICE_COLUMN = "PRICE";
-    private final String TOTAL_COLUMN = "TOTAL";
-    private final String TOTAL_COST = "TOTAL COST:";
-    private final String TOTAL_DISCOUNT = "DISCOUNT:";
-    private final String END_LINE_SIGHT = "\n";
-    private final String DASH_SIGHT = "-";
-    private final String DELIMITER_LINE = "-----------------------------------------------------------------------------";
-    private final BillCalculator billCalculator = new BillCalculatorImpl();
+    public static String STORE_NAME = "'Seven Heaven'";
+    public static String STORE_ADDRESS = "Address: 7th Heaven, 77";
+    public static String QUANTITY_COLUMN = "QTY";
+    public static String DESCRIPTION_COLUMN = "DESCRIPTION";
+    public static String PRICE_COLUMN = "PRICE";
+    public static String TOTAL_COLUMN = "TOTAL";
+    public static String TOTAL_COST = "TOTAL COST:";
+    public static String TOTAL_DISCOUNT = "DISCOUNT:";
+    public static String END_LINE_SIGHT = "\n";
+    public static String DASH_SIGHT = "-";
+    public static String DELIMITER_LINE = "-----------------------------------------------------------------------------";
+    public static BillCalculator billCalculator = new BillCalculatorImpl();
 
     public BillFormationData billFormationDataGenerate(List<ProductCalculationData> productsCalculationData) {
         BillFormationData billFormationData = new BillFormationData();
