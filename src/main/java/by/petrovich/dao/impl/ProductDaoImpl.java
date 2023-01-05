@@ -18,13 +18,13 @@ public class ProductDaoImpl implements ProductDao {
 
     private static final Logger LOGGER = LogManager.getLogger();
     private static final String SELECT_ALL = "SELECT id_product, name, prise, is_on_sale ";
-    private static final String FROM = "FROM billgenerator.products ";
+    private static final String FROM = "FROM products ";
     private static final String WHERE_ID_PRODUCT = "WHERE id_product = ?";
     private final DataBaseConnector dataBaseConnector = new DataBaseConnector();
 
     /**
-     * @param id
-     * @return
+     * @param id product id
+     * @return Product product
      */
     @Override
     public Product readProductById(int id) {

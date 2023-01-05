@@ -16,9 +16,9 @@ import static by.petrovich.dao.ColumnNames.*;
 public class DiscountCardDaoImpl implements DiscountCardDao {
     private final DataBaseConnector dataBaseConnector = new DataBaseConnector();
 
-    private static final String QUERY_READ_ALL_DISCOUNT_CARDS = "SELECT id_discount_card, number, discount_percent FROM billgenerator.discount_cards";
-    private static final String QUERY_READ_DISCOUNT_CARD_BY_ID = "SELECT id_discount_card, number, discount_percent FROM billgenerator.discount_cards where id_discount_card = ?";
-    private static final String QUERY_READ_DISCOUNT_CARD_BY_NUMBER = "SELECT id_discount_card, number, discount_percent FROM billgenerator.discount_cards where number = ?";
+    private static final String QUERY_READ_ALL_DISCOUNT_CARDS = "SELECT id_discount_card, number, discount_percent FROM discount_cards";
+    private static final String QUERY_READ_DISCOUNT_CARD_BY_ID = "SELECT id_discount_card, number, discount_percent FROM discount_cards where id_discount_card = ?";
+    private static final String QUERY_READ_DISCOUNT_CARD_BY_NUMBER = "SELECT id_discount_card, number, discount_percent FROM discount_cards where number = ?";
 
     /**
      * @return
