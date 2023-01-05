@@ -116,8 +116,8 @@ Install dependencies
 * [x] Describe the project in the README.md file (the stack is used, the run instructions).
 * [x] Use the gradle project builder.
 * [x] Place the source code of the project in any of the public repositories (bitbucket, github, gitlab).
-* [ ] Organize reading of initial data (products and discount cards, the format is the same) from files (in this case, you can pass the file name to the java command parameter set).
-* [ ] Cover the code with unit tests (at least 70%).
+* [x] Organize reading of initial data (products and discount cards, the format is the same) from files (in this case, you can pass the file name to the java command parameter set).
+* [x] Cover the code with unit tests (at least 70%).
 * [x] * Replace storage of source data in files with PostgreSQL; make 2 tables (product and discount_card); Operation DDL must be stored in src/main/resources in a file with .sql extension; store the database connection settings in application.properties.
 * [ ] ** Implement a RESTFUL interface (Servlet, Spring) (for example, receive a bill via GET http://localhost:8080/bill?itemId=1&itemId=1).
 * [ ] *** Deploy the application and PostgreSQL in Docker Expand the functionality at your discretion.
