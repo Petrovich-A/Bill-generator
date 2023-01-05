@@ -16,10 +16,10 @@ CREATE TABLE IF NOT EXISTS products (
   is_on_sale BOOLEAN NOT NULL DEFAULT FALSE
 ) ;
 
-insert into products (name, prise ) values ('Kindness', 7.25);
-insert into products (name, prise ) values ('Solidarity', 4.15);
-insert into products (name, prise ) values ('Sensitivity', 5.48);
-insert into products (name, prise ) values ('Empathy', 4.00);
-insert into products (name, prise ) values ('Humility', 9.50);
-insert into products (name, prise ) values ('Intelligence', 1.1);
-insert into products (name, prise, is_on_sale ) values ('Benevolence', 2.50, TRUE);
+insert into products (name, prise, is_on_sale ) values ('Aggressiveness', 0.27, TRUE);
+insert into products (name, prise) values ('Arrogance', 0.87);
+insert into products (name, prise, is_on_sale ) values ('Boastfulness', 1.02, TRUE);
+insert into products (name, prise) values ('Cruelty', 0.12);
+insert into products (name, prise) values ('Carelessness', 1.5);
+insert into products (name, prise) values ('Ignorance', 1.1);
+insert into products (name, prise, is_on_sale) values ('Indecisiveness', 0.88, TRUE);
