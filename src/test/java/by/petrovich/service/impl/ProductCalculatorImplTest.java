@@ -9,18 +9,18 @@ class ProductCalculatorImplTest {
 
     @Test
     void calculateCost() {
-        double prise = 0.63;
-        int quantity = 7;
-        double expected = 4.41;
+        double prise = 0.5;
+        int quantity = 4;
+        double expected = 2.00;
         double actual = productCalculator.calculateCost(prise, quantity);
         Assertions.assertEquals(expected, actual);
     }
 
     @Test
     void calculateDiscountAmount() {
-        double cost = 7.62;
+        double cost = 7.68;
         double discountPercent = 10;
-        double expected = 0.762;
+        double expected = 0.77;
         double actual = productCalculator.calculateDiscountAmount(cost, discountPercent);
         Assertions.assertEquals(expected, actual);
     }

@@ -1,6 +1,7 @@
 package by.petrovich.model;
 
 import java.util.List;
+import java.util.Objects;
 
 public class BillFormationData {
     private String header;
@@ -56,13 +57,27 @@ public class BillFormationData {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        BillFormationData that = (BillFormationData) o;
+        return Objects.equals(header, that.header) && Objects.equals(delimiterLine, that.delimiterLine) && Objects.equals(productRows, that.productRows) && Objects.equals(totalFooter, that.totalFooter);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(header, delimiterLine, productRows, totalFooter);
+    }
+
+    @Override
     public String toString() {
-        StringBuffer stringBuffer = new StringBuffer();
+        StringBuilder stringBuffer = new StringBuilder();
         stringBuffer.append(this.getHeader());
         stringBuffer.append(this.getDelimiterLine());
-        this.getProductRows().forEach(row -> stringBuffer.append(row));
+        this.getProductRows().forEach(stringBuffer::append);
         stringBuffer.append(this.getDelimiterLine());
         stringBuffer.append(this.getTotalFooter());
         return stringBuffer.toString();
     }
+
 }

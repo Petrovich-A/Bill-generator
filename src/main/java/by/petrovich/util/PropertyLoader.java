@@ -13,16 +13,17 @@ import java.util.Properties;
 
 public class PropertyLoader {
     private static final Logger LOGGER = LogManager.getLogger();
-    private static final String PROPERTY_PATH = "/properties/jdbc-config.properties";
+    private static final String MYSQL_PROPERTY_PATH = "/properties/MySQL-jdbc-config.properties";
+    private static final String POSTGRESQL_PROPERTY_PATH = "/properties/PostgreSQL-jdbc-config.properties";
     private static final Properties PROPERTIES = new Properties();
 
     static {
         try {
-            InputStream inputStream = Optional.ofNullable(Main.class.getResourceAsStream(PROPERTY_PATH))
+            InputStream inputStream = Optional.ofNullable(Main.class.getResourceAsStream(POSTGRESQL_PROPERTY_PATH))
                     .orElseThrow(FileNotFoundException::new);
             readProperties(inputStream);
         } catch (Exception e) {
-            LOGGER.log(Level.ERROR, "File {} does not exist, initialization failed.", PROPERTY_PATH);
+            LOGGER.log(Level.ERROR, "File {} does not exist, initialization failed.", POSTGRESQL_PROPERTY_PATH);
             throw new RuntimeException("File does not exist, initialization failed.", e);
         }
     }

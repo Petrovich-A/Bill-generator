@@ -1,9 +1,9 @@
 package by.petrovich.util;
 
 import by.petrovich.model.BillFormationData;
-import by.petrovich.service.BillPrinter;
+import by.petrovich.service.BillWriter;
 
-public class ConsoleWriter implements BillPrinter {
+public class ConsoleWriter implements BillWriter {
     /**
      * @param billFormationData
      * @return

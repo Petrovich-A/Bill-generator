@@ -1,7 +1,9 @@
 package by.petrovich;
 
 import by.petrovich.model.*;
+import by.petrovich.service.DiscountCardService;
 import by.petrovich.service.impl.BillService;
+import by.petrovich.service.impl.DiscountCardServiceImpl;
 import by.petrovich.service.impl.ProductServiceImpl;
 import by.petrovich.util.ConsoleWriter;
 import by.petrovich.util.FileReader;
@@ -23,14 +25,11 @@ public class Main {
         InputData inputData = parser.parseLines(inputLines);
         System.out.println("inputData: " + inputData.toString());
 
-        ProductServiceImpl productService = new ProductServiceImpl();
-        List<Product> products = productService.receiveProducts(inputData);
-        System.out.println("products: " + products);
-
-        DiscountCard discountCard;
-        discountCard = productService.receiveDiscountCard(inputData.getCardNumber());
+        DiscountCardService discountCardService = new DiscountCardServiceImpl();
+        DiscountCard discountCard = discountCardService.readDiscountCardByNumber(inputData.getCardNumber());
         System.out.println("discountCard: " + discountCard);
 
+        ProductServiceImpl productService = new ProductServiceImpl();
         List<ProductCalculationData> productsCalculationData;
         productsCalculationData = productService.determineProductCalculationData(inputData);
         System.out.println("productsCalculationData: " + productsCalculationData);
@@ -41,7 +40,6 @@ public class Main {
 
         BillFormationData billFormationData = billService.receiveBillFormationData(productsCalculationData);
         System.out.println();
-//        System.out.println("billFormationData: " + billFormationData);
 
         ConsoleWriter consoleWriter = new ConsoleWriter();
         consoleWriter.writeBill(billFormationData);

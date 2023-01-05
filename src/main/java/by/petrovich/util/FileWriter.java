@@ -1,7 +1,7 @@
 package by.petrovich.util;
 
 import by.petrovich.model.BillFormationData;
-import by.petrovich.service.BillPrinter;
+import by.petrovich.service.BillWriter;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -10,7 +10,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 
-public class FileWriter implements BillPrinter {
+public class FileWriter implements BillWriter {
     private static final Logger LOGGER = LogManager.getLogger();
     private final String PATH_TO_FILE = "src/main/resources/outputData.txt";
 
