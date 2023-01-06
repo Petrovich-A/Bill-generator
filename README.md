@@ -81,7 +81,7 @@ As a result of the application's operation, the generated receipt is print in co
 <!-- Database -->
 
 ### :inbox_tray: Database
-
+ 
 The project is designed using two database: 'MySQL' and 'PostgreSQL'. DDL files are stored in 'src/main/resources/database' [:open_file_folder:](https://github.com/Petrovich-A/Bill-generator/tree/master/src/main/resources/database). Connection settings to the database are stored in 'src/main/resources/properties/' [properties](https://github.com/Petrovich-A/Bill-generator/tree/master/src/main/resources/properties)
 The 'database structure' looks like this:
 
