@@ -164,6 +164,11 @@ Petrovich Alexandr:
 * gmail [<img alt="gmail" width="40px" src="https://icons8.com/icon/tnnUFgHrPmR0/gmail-logo" />](www.linkedin.com/in/petroviсh-alexаndr)
 * Project link [Bill-generator](https://github.com/Petrovich-A/Bill-generator)
 
+<a href="https://www.linkedin.com/in/petroviсh-alexаndr/" target="blank">
+<img align="center" src="https://icons8.com/icon/tnnUFgHrPmR0/gmail-logo" alt="gfhfgh" height="60" width="190" /></a>
+
+
+
 <!-- Acknowledgments -->
 
 ## :gem: Acknowledgements
