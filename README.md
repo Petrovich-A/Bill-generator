@@ -160,9 +160,9 @@ Distributed under the no License. See LICENSE for more information.
 
 Petrovich Alexandr: 
 
-* Linkedin [<img alt="linkedin" width="40px" src="https://img.icons8.com/color/48/null/linkedin.png" />](www.linkedin.com/in/petroviсh-alexаndr)
-* gmail [<img alt="gmail" width="40px" src="https://img.icons8.com/color-glass/48/null/gmail.png" />](www.linkedin.com/in/petroviсh-alexаndr)
-* Project link [Bill-generator](https://github.com/Petrovich-A/Bill-generator)
+[<img alt="linkedin" width="40px" src="https://img.icons8.com/color/48/null/linkedin.png" />](www.linkedin.com/in/petroviсh-alexаndr) Linkedin
+[<img alt="gmail" width="40px" src="https://img.icons8.com/color-glass/48/null/gmail.png" />](www.linkedin.com/in/petroviсh-alexаndr) gmail
+Project link [Bill-generator](https://github.com/Petrovich-A/Bill-generator)
 
 <!-- Acknowledgments -->
 
