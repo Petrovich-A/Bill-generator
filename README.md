@@ -37,6 +37,7 @@ alt="logo" width="600" height="auto" />
 
 - [About the Project](#star2-about-the-project)
     * [Tech Stack](#space_invader-tech-stack)
+    * [Database](#inbox_tray-database)
 - [Getting Started](#toolbox-getting-started)
     * [Running Tests](#test_tube-running-tests)
     * [Run Locally](#running-run-locally)
@@ -48,7 +49,7 @@ alt="logo" width="600" height="auto" />
 
 ## :star2: About the Project
 
-The developed application allows to generate an imitation of a store receipt (bill) with goods. The input data takes a set of parameters in the format <itemId-quantity> (itemId is the identifier of the product, quantity is its quantity. For example: 3-1, 2-5, 5-1. Card-1234 is also passed. Card-1234 means that a discount card with number 1234 has been found. 
+The developed application allows to generate an imitation of a store receipt (bill or check) with list of goods (products). The input data takes a set of parameters in the format '<itemId-quantity>' (itemId is the identifier of the product, quantity is its quantity. For example: 3-1, 2-5, 5-1. Card-1234 is also passed. Card-1234 means that a discount card with number 1234 has been found. 
 As a result of the application's operation, the generated receipt is print in console or to a file.
 
 <!-- TechStack -->
@@ -65,7 +66,8 @@ As a result of the application's operation, the generated receipt is print in co
 <details>
 <summary>Database</summary>
   <ul>
-    <li><a href="MySQL">MySQL</a></li>
+    <li><a href="https://www.postgresql.org">PostgreSQL</a></li>
+    <li><a href="https://www.mysql.com">MySQL</a></li>
   </ul>
 </details>
 
@@ -75,6 +77,30 @@ As a result of the application's operation, the generated receipt is print in co
     <li><a href="https://www.docker.com/">Docker</a></li>
   </ul>
 </details>
+
+<!-- Database -->
+
+### :inbox_tray: Database
+
+The project is designed using two database: 'MySQL' and 'PostgreSQL'. DDL files are stored in 'src/main/resources/database' [:open_file_folder:](https://github.com/Petrovich-A/Bill-generator/tree/master/src/main/resources/database). Connection settings to the database are stored in 'src/main/resources/properties/' [properties](https://github.com/Petrovich-A/Bill-generator/tree/master/src/main/resources/properties)
+The 'database structure' looks like this:
+
+**TABLE** `discount_cards`
+
+|  Column name    |   Datatype  |   PRIMARY KEY   |   NOT NULL  |   UNIQUE KEY | AUTO INCREMENT |
+|-----|-----|-----|-----|-----|----------------|
+|  `id_discount_card`   |   int  |   :heavy_check_mark:  |   :heavy_check_mark:  |  :heavy_check_mark:  |        :heavy_check_mark:        |
+|   `number`  |   int  |     |   :heavy_check_mark:  |    :heavy_check_mark: |                |
+|   `discount_percent`  |   double  |     |   :heavy_check_mark:  |     |                |
+
+**TABLE** `products`
+
+|   Column name  |  Datatype   |  PRIMARY KEY   |   NOT NULL  |   UNIQUE KEY  |  AUTO INCREMENT   |
+|-----|-----|-----|-----|-----|-----|
+|   `id_product`  | int   |   :heavy_check_mark:  |  :heavy_check_mark:   |  :heavy_check_mark:   |   :heavy_check_mark:  |
+|  `name`   |   varchar(45)   |     |   :heavy_check_mark:  |  :heavy_check_mark:   |     |
+|   `prise`  |  double   |     |  :heavy_check_mark:   |     |     |
+|  `is_on_sale`   |   tinyint  |     |     |     |     |
 
 <!-- Getting Started -->
 
@@ -132,9 +158,11 @@ Distributed under the no License. See LICENSE for more information.
 
 ## :handshake: Contact
 
-Petrovich Alexandr - [linkedin](www.linkedin.com/in/petroviсh-alexаndr) - a.piatrovich@gmail.com
+Petrovich Alexandr: 
 
-Project link: [Bill-generator](https://github.com/Petrovich-A/Bill-generator)
+* Linkedin [<img alt="linkedin" width="40px" src="https://icons8.com/icon/xuvGCOXi8Wyg/linkedin" />](www.linkedin.com/in/petroviсh-alexаndr)
+* gmail [<img alt="gmail" width="40px" src="https://icons8.com/icon/tnnUFgHrPmR0/gmail-logo" />](www.linkedin.com/in/petroviсh-alexаndr)
+* Project link [Bill-generator](https://github.com/Petrovich-A/Bill-generator)
 
 <!-- Acknowledgments -->
 
