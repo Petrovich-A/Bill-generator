@@ -49,7 +49,7 @@ alt="logo" width="600" height="auto" />
 
 ## :star2: About the Project
 
-The developed application allows to generate an imitation of a store receipt (bill or check) with list of goods (products). The input data takes a set of parameters in the format '<itemId-quantity>' (itemId is the identifier of the product, quantity is its quantity. For example: 3-1, 2-5, 5-1. Card-1234 is also passed. Card-1234 means that a discount card with number 1234 has been found. 
+The developed application allows to generate an imitation of a store receipt (bill or check) with list of goods (products). The input data takes a set of parameters in the format `<itemId-quantity>` (itemId is the identifier of the product, quantity is its quantity. For example: 3-1, 2-5, 5-1. Card-1234 is also passed. Card-1234 means that a discount card with number 1234 has been found. 
 As a result of the application's operation, the generated receipt is print in console or to a file.
 
 <!-- TechStack -->
@@ -82,8 +82,8 @@ As a result of the application's operation, the generated receipt is print in co
 
 ### :inbox_tray: Database
  
-The project is designed using two database: 'MySQL' and 'PostgreSQL'. DDL files are stored in 'src/main/resources/database' [:open_file_folder:](https://github.com/Petrovich-A/Bill-generator/tree/master/src/main/resources/database). Connection settings to the database are stored in 'src/main/resources/properties/' [properties](https://github.com/Petrovich-A/Bill-generator/tree/master/src/main/resources/properties)
-The 'database structure' looks like this:
+The project is designed using two database: `MySQL` and `PostgreSQL`. DDL files are stored in `src/main/resources/database` [scripts :open_file_folder:](https://github.com/Petrovich-A/Bill-generator/tree/master/src/main/resources/database). Connection settings to the database are stored in `src/main/resources/properties/` [properties :unlock:](https://github.com/Petrovich-A/Bill-generator/tree/master/src/main/resources/properties)
+The `database structure` looks like this:
 
 **TABLE** `discount_cards`
 
@@ -158,11 +158,8 @@ Distributed under the no License. See LICENSE for more information.
 
 ## :handshake: Contact
 
-Petrovich Alexandr: 
-
-[<img alt="linkedin" width="40px" src="https://img.icons8.com/color/48/null/linkedin.png" />](www.linkedin.com/in/petroviсh-alexаndr) Linkedin
-[<img alt="gmail" width="40px" src="https://img.icons8.com/color-glass/48/null/gmail.png" />](www.linkedin.com/in/petroviсh-alexаndr) gmail
-Project link [Bill-generator](https://github.com/Petrovich-A/Bill-generator)
+* Petrovich Alexandr: [<img alt="linkedin" width="30px" src="https://img.icons8.com/color/48/null/linkedin.png" />](www.linkedin.com/in/petroviсh-alexаndr)  [<img alt="gmail" width="30px" src="https://img.icons8.com/color-glass/48/null/gmail.png" />](www.linkedin.com/in/petroviсh-alexаndr)
+* Project link [Bill-generator](https://github.com/Petrovich-A/Bill-generator)</a>
 
 <!-- Acknowledgments -->
 
