@@ -30,8 +30,8 @@ public class Main {
         System.out.println("discountCard: " + discountCard);
 
         ProductServiceImpl productService = new ProductServiceImpl();
-        List<ProductCalculationData> productsCalculationData;
-        productsCalculationData = productService.determineProductCalculationData(inputData);
+        // if you use one-liners above then keep your style 
+        List<ProductCalculationData> productsCalculationData = productService.determineProductCalculationData(inputData);
         System.out.println("productsCalculationData: " + productsCalculationData);
 
         BillService billService = new BillService();
@@ -39,6 +39,8 @@ public class Main {
         System.out.println("bill: " + bill);
 
         BillFormationData billFormationData = billService.receiveBillFormationData(productsCalculationData);
+        // Empty println looks a bit lost. 
+        // Better to print at least something like "Receiving bill completed" 
         System.out.println();
 
         ConsoleWriter consoleWriter = new ConsoleWriter();
