@@ -3,6 +3,9 @@ package by.petrovich.util;
 import by.petrovich.model.BillFormationData;
 import by.petrovich.service.BillWriter;
 
+// It's not clear by name what interface it implements
+// I would call it ConsoleBillWriter
+// And it should be in Impl section. 
 public class ConsoleWriter implements BillWriter {
     /**
      * @param billFormationData

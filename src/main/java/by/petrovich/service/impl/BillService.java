@@ -8,6 +8,7 @@ import by.petrovich.util.BillFormatter;
 
 import java.util.List;
 
+// Why is it different from other services that use ...Impl approach? 
 public class BillService {
 
     private final BillCalculator billCalculator = new BillCalculatorImpl();
@@ -15,6 +16,9 @@ public class BillService {
     private final BillFormatter billFormatter = new BillFormatter();
 
     public Bill receiveBill(List<ProductCalculationData> productsCalculationData) {
+        // Looks over-engineered to me
+        // Could be just the new instance and setting properties
+        // In my opinion builder better suits for more complex cases
         return Bill.newBuilder()
                 .withProductCalculationData(productsCalculationData)
                 .withTotalPrise(billCalculator.calculateTotalCost(productsCalculationData))
